@@ -1,0 +1,80 @@
+\documentclass[jkps,preprint,fleqn,showpacs,showkeys]{revtex4}
+
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{lineno}
+\usepackage{xspace}
+\usepackage{cleveref}
+
+%\input{commands.tex}
+
+\newcommand{\pp}{\mbox{$pp$}\xspace}
+\newcommand{\pAu}{\mbox{$p$+Au}\xspace}
+\newcommand{\pPb}{\mbox{$p$+Pb}\xspace}
+\newcommand{\pythia}{\textsc{Pythia8}\xspace}
+\newcommand{\deta}{\mbox{$\Delta\eta$}\xspace}
+\newcommand{\dphi}{\mbox{$\Delta\varphi$}\xspace}
+\newcommand{\pt}{\mbox{$p_{\mathrm{T}}$}\xspace}
+\newcommand{\pT}{\mbox{$p_{T}$}\xspace}
+\newcommand{\Nch}{\mbox{$N_\mathrm{ch}$}\xspace}
+\newcommand{\pythiae}{\pythia\ensuremath{~\mathrm{default}}}
+\newcommand{\pythiashoving}{{\pythia\ensuremath{~\mathrm{String}~}}\ensuremath{\mathrm{Shoving}}}
+\newcommand{\sonly}        {\ensuremath{\sqrt{s}}}
+
+\begin{document}
+\setcounter{page}{0}
+\title[]{Exploring the string shoving model in PYTHIA8 \\for collective behaviors in $pp$ collisions}
+\author{Junlee \surname{Kim}}
+\email{junlee.kim@cern.ch}
+\author{Eun-Joo \surname{Kim}}
+\affiliation{Division of Science Education, Jeonbuk National University, Jeonju 54896}
+\author{SuJeong \surname{Ji}}
+\author{SangHoon \surname{Lim}}
+\email{shlim@pusan.ac.kr}
+%\thanks{Fax: +82-2-554-1643}
+\affiliation{Department of Physics, Pusan National University, Busan 46241}
+
+%\date[]{Received 6 August 2007}
+
+\begin{abstract}
+Two-particle correlations have been used to study property of a produced medium called Quark-Gluon Plasma (QGP) in relativistic heavy-ion collisions, and a long-range correlation among produced particles has been considered as a strong evidence of strongly interacting QGP. 
+Strikingly, clear long-range correlations have been also observed in small collision systems like $pp$ and $p$+$A$ at a wide range of collision energies. 
+%Several theoretical approaches have been proposed, but results in small collision systems have not fully understood yet.
+A model introducing a repulsive force between flux tubes called string shoving can qualitatively describe the long-range near-side correlations in high multiplicity $pp$ collisions. 
+This model implemented in the \pythia Monte Calro event generator allows us to perform detailed study.
+In this work, a full data analysis to calculate associated yields and flow coefficients is performed with \pythia events, and the results are compared with experimental results.
+We find that the string shoving model overestimates long-range near-side correlations particularly in low multiplicity events.
+We also introduce a method to subtract such overestimated correlations in low multiplicity to have a more relevant comparison with the data. 
+%Further study reveals that the string shoving model also generates the repulsive force in jet fragments. We also introduce a method to subtract such overestimated correlations and find that the predictions from the string shoving  after the subtraction are more comparable with the experimental results.
+
+\end{abstract}
+
+\pacs{68.37.Ef, 82.20.-w, 68.43.-h}
+\keywords{String shoving, Collectivity, $pp$ collision}
+\maketitle
+
+\input{sec_intro.tex}
+\pagebreak
+\input{sec_ana.tex}
+\pagebreak
+\input{sec_results.tex}
+\input{sec_summary.tex}
+
+%\pagebreak
+
+\begin{acknowledgments}
+%The authors would like to thank for useful discussions and a careful reading of the manuscript. 
+%J. Kim and E.-J. Kim acknowledge support from the... .
+S.J. Ji and S.H. Lim acknowledge support from a 2-Year Research Grant of Pusan
+National University.
+%The authors would like to thank Mr. Kim for helpful discussions and
+%gratefully acknowledge support by MOCIE through National R$\&$D
+%Project for Nano Science and Technology. C. H. C. and W. J. J.
+%acknowledge the financial support by MOE through BK21 fellowships.
+\end{acknowledgments}
+
+\bibliography{paper}
+
+\end{document}
