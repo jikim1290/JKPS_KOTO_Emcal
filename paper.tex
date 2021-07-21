@@ -14,7 +14,7 @@
 
 \begin{document}
 \setcounter{page}{0}
-\title[]{ Monte-Carlo-based design of a new sampling calorimeter toward the measurement of incident angle }
+\title[]{ A Monte Carlo based design of a new sampling calorimeter toward the measurement of incident angle }
 
 \author{YoungJun \surname{Kim}}
 \affiliation{Department of Physics, Korea University, Seoul 02841}
@@ -23,7 +23,7 @@
 \author{Eun-Joo \surname{Kim}}
 \affiliation{Department of Physics education, Jeonbuk National University, Jeonju 54896}
 \author{GeiYoub  \surname{Lim}}
-\affiliation{IPNS/KEK Tshukuba, Jaoan 305-0801}
+\affiliation{IPNS/KEK Tsukuba, Japan 305-0801}
 
 %\date[]{Received 6 August 2007}
 
@@ -39,16 +39,30 @@ THIS IS ABSTRACT
 
 \section{Motivation}
 \label{sec:mot}
+Electromagnetic (EM) calorimeter is one of major detector in nuclear and particle physics. 
+
 
 \section{Analysis method}
 \label{sec:ana}
+\subsection{Detector construction}
+
+
+\subsection{XGBOOST: A toolkit for machine learning}
+\label{sec:anaML}
+Among many packages for machine learning in the high energy physics area~\cite{ATLAS:2020iwa} is the $\XGB$, supporting a scalable tree boosting system~\cite{xgboost:2016}. The $\XGB$ package is used to reconstruct the incident angle of incident $\gamma$ particles with deposit energies, which is mainly from the secondary particles of the EM shower, in the each channel. The $\XGB$ requires that the number of input data is identical, which is defined as the number of channels in this paper. For the $\XGB$ to reconstruct the angle, the training procedure for the $\XGB$ needs to be preceded. The training procedure helps the $\XGB$ study how $\gamma$ interacts with the detector and deposits the energy to the each channel with respect to the incident angle for a given $\gamma$ energy. From the fact that the training procedure is done with the specific data samples, the $\XGB$ can not reconstruct the angle, which is beyond the sample used for the training. Input data, deposit energies for whole channels, are obtained from the calculation of the EM shower in the detector simulated by the Geant4 package. Simulations are done with the uniform incident polar angle ($\theta$) distribution from 0 to 50 degree and the uniform azimuthal angle ($\varphi$) distribution from 0 to 360 degree for the training, which makes the $\XGB$ possible to reconstruct events having 0~$<\theta<$~50~degree and 0~$<\varphi<$~360~degree. The reconstruction of $\theta$ by the $\XGB$, completing the training procedure, is tested with the fixed $\theta$ and uniform $\varphi$ from 0 to 360 degree. The resolution of the reconstruction is defined as the standard deviation of Gaussian function. 
 
 \section{Results}
 \label{sec:res}
+\subsection{Machine learning parameters}
+
+
+\subsection{Inspection of detector dimension}
 
 
 \section{Conclusions}
+
 \label{sec:con}
+
 
 %\pagebreak
 
