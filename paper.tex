@@ -14,7 +14,7 @@
 
 \begin{document}
 \setcounter{page}{0}
-\title[]{ A Monte Carlo based design of a new sampling calorimeter toward the measurement of incident angle }
+\title[]{ A Monte Carlo based new sampling calorimeter toward the measurement of $\gamma$ incident angle }
 
 \author{YoungJun \surname{Kim}}
 \affiliation{Department of Physics, Korea University, Seoul 02841}
@@ -28,8 +28,8 @@
 %\date[]{Received 6 August 2007}
 
 \begin{abstract}
-THIS IS ABSTRACT
-
+SHORT MOTIVATION HERE. 
+We present the studies on Monte Carlo based detector configuration to measure the incident angle of the $\gamma$. The Geant4 and the $\XGB$ packages are used to simulate interactions of electromagnetic showers with detector materials and to reconstruct the incident angle with the machine learning method. The sandwich-type sampling calorimeter is configured with 5-mm-thick scintillator strips and 1-mm-thick lead plates. The sampling fraction and the Moliere radius of the detector are xxx and xxx, respectively. We find that the configuration with 15-mm-wide scintillator strips is found to provide xxx resolution and the front part of the detector as much as 4.6-radiation-length thickness provides the same resolution with xxx inefficiency.
 \end{abstract}
 
 
@@ -39,24 +39,72 @@ THIS IS ABSTRACT
 
 \section{Motivation}
 \label{sec:mot}
-Electromagnetic (EM) calorimeter is one of major detector in nuclear and particle physics. 
+Electromagnetic calorimeter (EM-Cal) has played an important role in nuclear and particle physics especially to detect photon[]. The most important property of the detector is good energy and timing resolution, and various crystals has been developed for the purpose[]. On the other hand, the sampling calorimeter consisting of alternating converter generating shower particles and counter measuring energy deposit of the shower particles tends to replace the crystal calorimeter in large-scale high energy experiment[].
+
+Due to a fluctuation of energy deposit in the converter, sampling fluctuation, the sampling calorimeter suffers poor energy resolution. This fluctuation becomes not so important for high energy photons owing to large number of shower particles. When we use a plastic scintillator as a counter, we can fabricate a large scale of calorimeter with relatively low cost.  
+There are many efforts to develop new types of calorimeter and a fine-segmented sampling calorimeter is in the line[]. 
+
+The sampling calorimeter enable us to measure not only energy but also incident angle of photon. Considering a stochastic process in shower generation, there is a certain limitation of detection resolution. Also, the effect of sampling fluctuation is matter in medium energy photons in range 100 MeV to few GeV photons. Even though these drawbacks, there is an experiment to have quite strong motivation on developing the calorimeter able to measure incident angle.
+
+KOTO experiment, being performed at the J-PARC in Japan, aims at searching for the $K_L \rightarrow \pi^0 \nu \bar{\nu}$ decay.  This decay is very clean in theoretical calculation[] and large potential to access the new physics beyond the Standard Model[]. However, current experimental sensitivity is still far from the SM expectation[] mainly due to its extremely small branching fraction and very weak kinematic condition to define a signature of the decay. 
+
+Considering negligible detection efficiency on neutrinos, the $K_L \rightarrow \pi^0 \nu \bar{\nu}$ decay is defined as an event existing only single $\pi^0$ in the final sate which is reconstructed by detecting two photons generated from prompt decay of the $\pi^0$. The KOTO utilizes un-doped cesium iodide (CsI) crystals as an EM-Cal to measure the photons. An hermetic detector system surrounding decay region confirms that there is no any particles accompanying the two photons[]. 
+
+In reality, energies and positions of two photons measured at the EM-Cal are not enough to reconstruct the $\pi^0$, and we need an assumption that they are generated from the $\pi^0$ decaying at beam axis. This reconstruction is totally failed in case the assumption is not correct any more, but there is no information to figure out, unfortunately. 
+ In addition to the current reconstruction of $\pi^0$, we can extract its decay position independently with the angle measurement. By requiring a consistency between two vertices reconstructed from different observables, we can select genuine single $\pi^0$ decay rejecting various kinds of wrong pair of photons such as odd-pairing of $K_L \rightarrow \pi^0 \pi^0$ decays, neutron induced two clusters, and so on. It also enable us to remove $\pi^0$ and $\eta$ decays produced by halo neutrons because they occur far from the beam axis. We can expect similar rejection against $K_L \rightarrow \gamma \gamma$ decays when the $K_L$ deviate form the beam center due to scattering. 
+
+For the angle measurement of photon, we should get an information about the spatial profile of shower particles generated in the electromagnetic calorimeter. This will be realized by recording energy deposit to the cell of detector separately, which are finely segmented in three dimensions. 
+A sampling calorimeter consisting of alternating lead sheet and strips of plastic scintillator could be a good candidate of the calorimeter as describe in this paper.
 
 
-\section{Analysis method}
+
+\section{method}
 \label{sec:ana}
 \subsection{Detector construction}
+We constructed a prototype sampling electromagnetic calorimeter with alternative stacking of thin Pb sheets and scintillator strips. A Pb sheet has a dimension of 50 cm (w) $\times$ 50 cm (l) $\times$ 1 mm (t). And a single layer of scintillator plate consists of 25 long scintillator segments, and each segment has a dimension of 2 cm (w) $\times$ 50 cm (l) $\times$ 5 mm (t). The full geometry consists of 105 layers  which is corresponding to 20 $X_0$. 
+
 
 
 \subsection{XGBOOST: A toolkit for machine learning}
 \label{sec:anaML}
-Among many packages for machine learning in the high energy physics area~\cite{ATLAS:2020iwa} is the $\XGB$, supporting a scalable tree boosting system~\cite{xgboost:2016}. The $\XGB$ package is used to reconstruct the incident angle of incident $\gamma$ particles with deposit energies, which is mainly from the secondary particles of the EM shower, in the each channel. The $\XGB$ requires that the number of input data is identical, which is defined as the number of channels in this paper. For the $\XGB$ to reconstruct the angle, the training procedure for the $\XGB$ needs to be preceded. The training procedure helps the $\XGB$ study how $\gamma$ interacts with the detector and deposits the energy to the each channel with respect to the incident angle for a given $\gamma$ energy. From the fact that the training procedure is done with the specific data samples, the $\XGB$ can not reconstruct the angle, which is beyond the sample used for the training. Input data, deposit energies for whole channels, are obtained from the calculation of the EM shower in the detector simulated by the Geant4 package. Simulations are done with the uniform incident polar angle ($\theta$) distribution from 0 to 50 degree and the uniform azimuthal angle ($\varphi$) distribution from 0 to 360 degree for the training, which makes the $\XGB$ possible to reconstruct events having 0~$<\theta<$~50~degree and 0~$<\varphi<$~360~degree. The reconstruction of $\theta$ by the $\XGB$, completing the training procedure, is tested with the fixed $\theta$ and uniform $\varphi$ from 0 to 360 degree. The resolution of the reconstruction is defined as the standard deviation of Gaussian function. 
+Among many packages for machine learning in the high energy physics area~\cite{ATLAS:2020iwa} is the $\XGB$, supporting a scalable tree boosting system~\cite{xgboost:2016}. The $\XGB$ package is used to reconstruct the incident angle of incident $\gamma$ particles with deposit energies, which is mainly from the secondary particles of the EM shower, in the each channel. The $\XGB$ requires that the number of input data is identical, which is defined as the number of channels in this paper. For the $\XGB$ to reconstruct the angle, the training procedure for the $\XGB$ needs to be preceded. The training procedure helps the $\XGB$ study how $\gamma$ interacts with the detector and deposits the energy to the each channel with respect to the incident angle for a given $\gamma$ energy. Input data, deposit energies for whole channels, are obtained from the calculation of the EM shower in the detector simulated by the Geant4 package. Simulations are done with the uniform incident polar angle ($\theta$) distribution from 0 to 50 degree and the uniform azimuthal angle ($\varphi$) from 0 to 360 degree for the training, which makes the $\XGB$ possible to reconstruct events having 0~$<\theta<$~50~degree and 0~$<\varphi<$~360~degree. The reconstruction of $\theta$ by the $\XGB$, completing the training procedure, is tested with the fixed $\theta$ and uniform $\varphi$ from 0 to 360 degree.
+
+%The resolution of the reconstruction is defined as the standard deviation of Gaussian function around $\pm$~2 times standard deviations from the peak of the distribution.
 
 \section{Results}
 \label{sec:res}
-\subsection{Machine learning parameters}
+
+\subsection{Detector property}
+
+\subsection{Parameterization for machine learning setting}
+The configuration of the $\XGB$ can be defined with five parameters, described in Tab.~\ref{tab:XgbPar}. The parameters are selected as one providing better angular resolution. It is found that the Max. depth mostly affects the angular resolution, and the resolution is not enhanced for Max. depth~$>$~15 any more. It is also worth mentioning that the N\_estimators larger than 1000 does not provide better resolution with the Max. depth~=~15. The angular resolution with described parameters is found to be about 1.3~degree, as shown in fig.(def).
+
+\begin{table}[hbt!]
+\centering
+\caption{Parameterization of the $\XGB$}
+\begin{tabular}{ccc}
+\hline 
+Parameter & Function & Suggested value \\ \hline 
+N\_estimators & The number of decision trees & 1000 \\  
+Max. depth & Possible maximum depth of tree structure & 15 \\ 
+Subsample & Fraction of total data used for a single decision & 1 \\ 
+Learning rate & Step length for calculation & 0.08 \\ 
+Gamma & Requirement on minimum loss function & 0 \\ 
+\hline
+\end{tabular}
+\label{tab:XgbPar}
+\end{table}
+
+\subsection{Detector dimension}
+The performance of the detector is tested with different detector dimensions. Different geometries are simulated in the Geant4 package and corresponding training procedures are applied with the same number of training events as 100,000. It if found that the configuration with 15-mm-wide strips provides better resolution than one with smaller strip widths. 
+
+The angle reconstruction is tested only with signals in front layers. Usages of front-layer signals are applied to the data sample for training and test procedures at the same time. The reconstruction with 24 layers, which possess the 4.6$X_{0}$, provides identical resolution with one from full geometry, while possessing about xxx\% inefficiency due to no responses in the front region. As a results of the inefficiency, A delta peak can be seen in Fig.(fl). This peak can be rejected with the application of the total energy threshold (10~MeV in Fig.(fl)) in the front region.
+
+The energy threshold and the attenuation effects are studied. The attenuation effect is applied to the deposit energies in each channel with the attenuation function~\cite{Murayama:2020mcp}. The energy threshold is applied to the all channels after the application of the attenuation effect. The coefficients of the attenuation effect are thought to be same as~\cite{Murayama:2020mcp}, and the applied threshold is 0.5~MeV. These responses are applied to the data sample for the training and test procedure. The angular resolution is found to be consistent with the resolution without such effects.
+
+The incident angle and the incident energy dependencies of the angle reconstruction are studied with the same configuration and requirements mentioned before. It is found that 
 
 
-\subsection{Inspection of detector dimension}
 
 
 \section{Conclusions}
