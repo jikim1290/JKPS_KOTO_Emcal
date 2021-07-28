@@ -69,15 +69,13 @@ We constructed a prototype sampling electromagnetic calorimeter with alternative
 \label{sec:anaML}
 Among many packages for machine learning in the high energy physics area~\cite{ATLAS:2020iwa} is the $\XGB$, supporting a scalable tree boosting system~\cite{xgboost:2016}. The $\XGB$ package is used to reconstruct the incident angle of incident $\gamma$ particles with deposit energies, which is mainly from the secondary particles of the EM shower, in the each channel. The $\XGB$ requires that the number of input data is identical, which is defined as the number of channels in this paper. For the $\XGB$ to reconstruct the angle, the training procedure for the $\XGB$ needs to be preceded. The training procedure helps the $\XGB$ study how $\gamma$ interacts with the detector and deposits the energy to the each channel with respect to the incident angle for a given $\gamma$ energy. Input data, deposit energies for whole channels, are obtained from the calculation of the EM shower in the detector simulated by the Geant4 package. Simulations are done with the uniform incident polar angle ($\theta$) distribution from 0 to 50 degree and the uniform azimuthal angle ($\varphi$) from 0 to 360 degree for the training, which makes the $\XGB$ possible to reconstruct events having 0~$<\theta<$~50~degree and 0~$<\varphi<$~360~degree. The reconstruction of $\theta$ by the $\XGB$, completing the training procedure, is tested with the fixed $\theta$ and uniform $\varphi$ from 0 to 360 degree.
 
-%The resolution of the reconstruction is defined as the standard deviation of Gaussian function around $\pm$~2 times standard deviations from the peak of the distribution.
-
 \section{Results}
 \label{sec:res}
 
 \subsection{Detector property}
 
 \subsection{Parameterization for machine learning setting}
-The configuration of the $\XGB$ can be defined with five parameters, described in Tab.~\ref{tab:XgbPar}. The parameters are selected as one providing better angular resolution. It is found that the Max. depth mostly affects the angular resolution, and the resolution is not enhanced for Max. depth~$>$~15 any more. It is also worth mentioning that the N\_estimators larger than 1000 does not provide better resolution with the Max. depth~=~15. The angular resolution with described parameters is found to be about 1.3~degree, as shown in fig.(def).
+The configuration of the $\XGB$ can be defined with five parameters, described in Tab.~\ref{tab:XgbPar}. The parameters are selected as one providing better angular resolution. It is found that the Max. depth mostly affects the angular resolution, and the resolution is not enhanced for Max. depth~$>$~15 any more. It is also worth mentioning that the N\_estimators larger than 1000 does not provide better resolution with the Max. depth~=~15. The angular resolution of the reconstruction is defined as the standard deviation of Gaussian function, whose parameters are evaluated by fitting the reconstructed angle distribution. The angular resolution with described parameters is estimated to be about 1.3~degree, as shown in fig.(def).
 
 \begin{table}[hbt!]
 \centering
