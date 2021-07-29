@@ -75,7 +75,13 @@ Among many packages for machine learning in the high energy physics area~\cite{A
 \subsection{Detector property}
 
 \subsection{Parameterization for machine learning setting}
-The configuration of the $\XGB$ can be defined with five parameters, described in Tab.~\ref{tab:XgbPar}. The parameters are selected as one providing better angular resolution. It is found that the Max. depth mostly affects the angular resolution, and the resolution is not enhanced for Max. depth~$>$~15 any more. It is also worth mentioning that the N\_estimators larger than 1000 does not provide better resolution with the Max. depth~=~15. The angular resolution of the reconstruction is defined as the standard deviation of Gaussian function, whose parameters are evaluated by fitting the reconstructed angle distribution. The angular resolution with described parameters is estimated to be about 1.3~degree, as shown in fig.(def).
+The configuration of the $\XGB$ can be defined with five parameters, described in Tab.~\ref{tab:XgbPar}. The parameters are selected as one providing better angular resolution. It is found that the Max. depth mostly affects the angular resolution, and the resolution is not enhanced for Max. depth~$>$~15 any more. It is also worth mentioning that the N\_estimators larger than 1000 does not provide better resolution with the Max. depth~=~15. The angular resolution of the reconstruction is defined as the standard deviation of Gaussian function, whose parameters are evaluated by fitting the reconstructed angle distribution. Figure~\ref{fig:angle_reco_def} shows the reconstructed $\theta$ distribution with respect to each incident $\theta$ with described training parameters. The angular resolution for all $\theta$ is estimated to be about 1.3~degree.
+
+\begin{figure}[!hbt]
+\includegraphics[width=0.89\textwidth]{figures/Fig1_reco_def.pdf}
+\caption{ (Color online) Reconstructed $\theta$ with respect to each true incident $\theta$ dotted lines denote each Gaussian function fitting the reconstructed $\theta$ distribution. The standard deviation of all Gaussian functions are estimated to be about 1.3 degree.}
+\label{fig:angle_reco_def}
+\end{figure}
 
 \begin{table}[hbt!]
 \centering
