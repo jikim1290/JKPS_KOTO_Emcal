@@ -117,7 +117,11 @@ The performance of the detector is tested with different detector dimensions. Di
 
 The angle reconstruction is tested only with signals in front layers. Usages of front-layer signals are applied to the data sample for training and test procedures at the same time. The reconstruction with 24 layers, which possess the 4.6$X_{0}$, provides the identical resolution with one from full geometry. The inefficiency can arise mainly due to no responses in the front region, and can be evaluated by comparing the number of events with and without applying the minimum total energy ($E_{\rm{tot}}$) threshold in the front region. The inefficiency for (4.6$X_{0}$) is estimated to be 5.8\%. Figure~\ref{fig:angle_reco_layer} shows the reconstructed $\theta$ distribution (left) and the angular resolution as a function of front layer depth used for the reconstruction (right). The reconstructed $\theta$ without the $E_{\rm{tot}}$ threshold exhibits a delta peak near $\theta=$~0 as a results of not enough information to reconstruct $\theta$, And this peak clearly disappears by applying the $E_{\rm{tot}}$ threshold. The angular resolution is evaluated after applying the $E_{\rm{tot}}$ threshold and estimated to be 1.3 deg, which is comparable results with fig.~\ref{fig:angle_reco_width} for 4.6$X_{0}$ depth, so that the radiation length for the $\theta$ reconstruction is determined to be 4.6$X_{0}$.
 
-
+\begin{figure}[!hbt]
+\includegraphics[width=0.8\textwidth]{figures/Fig4_reco_ecut.pdf}
+\caption{ (Color online) Reconstructed $\theta$ for 1 GeV and $\theta_{\rm{true}}=$~10~deg $\gamma$ with (red) and without (black) the total energy ($E_{\rm{tot}}$) selection (left), and the angular resolution as a function of front layer depth used for the reconstruction (right). The inefficiency for 4.6$X_{0}$ is estimated to be 5.8\%  }
+\label{fig:angle_reco_layer}
+\end{figure}
 
 The energy threshold and the attenuation effects are studied. The attenuation effect is applied to the deposit energies in each channel with the attenuation function~\cite{Murayama:2020mcp}. The energy threshold is applied to the all channels after the application of the attenuation effect. The coefficients of the attenuation effect are thought to be same as~\cite{Murayama:2020mcp}, and the applied threshold is 0.5~MeV. These responses are applied to the data sample for the training and test procedure. The angular resolution is found to be consistent with the resolution without such effects.
 
