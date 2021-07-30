@@ -28,8 +28,7 @@
 %\date[]{Received 6 August 2007}
 
 \begin{abstract}
-SHORT MOTIVATION HERE. 
-We present the studies on Monte Carlo based detector configuration to measure the incident angle of the $\gamma$. The Geant4 and the $\XGB$ packages are used to simulate interactions of electromagnetic showers with detector materials and to reconstruct the incident angle with the machine learning method. The sandwich-type sampling calorimeter is configured with 5-mm-thick scintillator strips and 1-mm-thick lead plates. The sampling fraction and the Moliere radius of the detector are xxx and xxx, respectively. We find that the configuration with 15-mm-wide scintillator strips is found to provide xxx resolution and the front part of the detector as much as 4.6-radiation-length thickness provides the same resolution with xxx inefficiency.
+We present studies on Monte Carlo based detector configuration to measure the incident angle of the $\gamma$. The Geant4 and the $\XGB$ packages are used to simulate interactions of electromagnetic showers with detector materials and to reconstruct the incident angle with the machine learning method. The sandwich-type sampling calorimeter is configured with 5-mm-thick scintillator strips and 1-mm-thick lead plates. The sampling fraction and the Moliere radius of the detector are xxx and xxx, respectively. We find that the configuration with 15-mm-wide scintillator strips is found to provide xxx resolution and the front part of the detector as much as 4.6-radiation-length thickness provides the same resolution with xxx inefficiency.
 \end{abstract}
 
 
@@ -120,10 +119,14 @@ The angle reconstruction is tested only with signals in front layers. Usages of 
 \begin{figure}[!hbt]
 \includegraphics[width=0.8\textwidth]{figures/Fig4_reco_ecut.pdf}
 \caption{ (Color online) Reconstructed $\theta$ for 1 GeV and $\theta_{\rm{true}}=$~10~deg $\gamma$ with (red) and without (black) the total energy ($E_{\rm{tot}}$) selection (left), and the angular resolution as a function of front layer depth used for the reconstruction (right). The inefficiency for 4.6$X_{0}$ is estimated to be 5.8\%  }
-\label{fig:angle_reco_layer}
+\label{fig:angle_reco_ecut}
 \end{figure}
 
-The energy threshold and the attenuation effects are studied. The attenuation effect is applied to the deposit energies in each channel with the attenuation function~\cite{Murayama:2020mcp}. The energy threshold is applied to the all channels after the application of the attenuation effect. The coefficients of the attenuation effect are thought to be same as~\cite{Murayama:2020mcp}, and the applied threshold is 0.5~MeV. These responses are applied to the data sample for the training and test procedure. The angular resolution is found to be consistent with the resolution without such effects.
+The detector responses on the energy deposit are studied. The attenuation effect, smearing effect due to the photon statistics, and energy threshold for each channel are considered. The attenuation effect is applied to the deposit energies in each channel with the attenuation function, described in~\cite{Murayama:2020mcp}. The coefficients for the attenuation effect are also obtained from~\cite{Murayama:2020mcp}. The energy deposit after the attenuation effect is smeared with respect to the number of photon statistics. The number of photons ($\rm{n.p.e}$) is assumed to be 50 for 1 MeV deposit. The standard deviation ($\sigma(E)$) for the smearing can be defined as 
+\begin{eqnarray}
+\sigma(E) = \sqrt{E/\rm{n.p.e}}
+\end{eqnarray}
+After the smearing attenuated energy deposit, the energy threshold (0.5 MeV) is applied to the all channels. These effects are applied to the test samples and the training samples, and the training is done with and without applying such effects and the test is done with applying the effects. Figure~\ref{fig:angle_reco_ecut} shows that the angular resolution is found to be consistent regardless of applying such effects.
 
 
 
