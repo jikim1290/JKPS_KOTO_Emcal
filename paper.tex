@@ -9,13 +9,11 @@
 \usepackage{cleveref}
 \usepackage {xcolor}
 
-%\input{commands.tex}
-
 \newcommand{\XGB}{XGBoost}
 
 \begin{document}
 \setcounter{page}{0}
-\title[]{ MC-based feasibility study of new sampling calorimeter for measuring the $\gamma$ incident }
+\title[]{ MC-based feasibility study of new sampling calorimeter for measuring the $\gamma$ incident angle }
 
 \author{YoungJun \surname{Kim}}
 \author{Jung Keun \surname{Ahn}}
@@ -31,14 +29,11 @@
 %\date[]{Received 6 August 2007}
 
 \begin{abstract}
-We present studies on detector configuration to obtain angular information for gammas of energies in a range from hundred MeV to few GeV. For the angular measurement, we need to obtain profiles of energy deposit along to both of the longitudinal and transverse directions, which could be realized by using the sampling calorimeter. The sampling calorimeter consists of alternating 1-mm-thick lead sheets producing the electromagnetic shower and strips of 5-mm-thick plastic scintillator measuring the energy deposit by the shower particles. The strips are arranged along to the alternating horizontal and vertical directions to give transverse profile by combining the both directions at a given longitudinal position. In this studies, we used the GEANT4 to simulate energy deposit to the individual strips of the calorimeter, and the $\XGB$ package to obtain the incident angle from the energy deposits. 
+We present studies on the detector configuration to measure the incident angle of the $\gamma$, which has the energy ranging from hundred MeV to few GeV using a new sampling calorimeter. The sampling calorimeter consists of alternating 1-mm-thick lead sheets producing the electromagnetic (EM) shower and strips of 5-mm-thick plastic scintillators measuring the energy deposit by the shower particles. The strips are arranged along to the alternating horizontal and vertical directions to measure the transverse profile by combining the both directions at a given longitudinal position. In this paper, we used the GEANT4 to simulate energy deposit to the individual strips of the calorimeter, and the $\XGB$ to reconstruct the incident angle from energy deposits. 
 
-The angular resolution weakly depends on the width of the strips up to 25mm and becomes worse rapidly with increasing the width. We found the proper detector thickness for the angular measurement is around 5-radiation (5 Xo) and the expected angular resolution becoms to be 1.3 degrees with 25-mm width of the strips. This resolution dose not depends on the incident gamma upto 30 degrees, and its energy dependency is expressed as $p_0 + P_1 / \sqrt{E_\gamma}$. (p0, p1 will be replaced by the obtained numbers) 
+The angular resolution weakly depends on the width of the strips up to 15 mm and becomes worse with the increasing width. It is found that the incident angle is reconstructed with the compatible angular resolution using front 5 radiation length of the detector. The resolution does not depend on the incident angle up to 30 degrees, and largely depends on the incident energy, which can be expressed as 0.1+1.2$/ \sqrt{E_\gamma}$.
 
-
-%We present studies on Monte Carlo based detector configuration to measure the incident angle of the $\gamma$. The Geant4 and the $\XGB$ packages are used to simulate interactions of electromagnetic showers with detector materials and to reconstruct the incident angle with the machine learning method. The sampling calorimeter is configured with alternating 5-mm-thick scintillator strips and 1-mm-thick lead plates. The sampling fraction and the Moliere radius of the detector are xxx and xxx, respectively. We find that the configuration with 15-mm-wide scintillator strips provides 1.3~deg resolution, and the same resolution is expected with only front part of the detector in 4.6-radiation-length in thickness with 5.8\% inefficiency. Furthermore, the incident angle dependency of the angular resolution is found to be consistent, and the incident energy dependency is found to be inversely proportional.
 \end{abstract}
-
 
 %\pacs{68.37.Ef, 82.20.-w, 68.43.-h}
 %\keywords{String shoving, Collectivity, $pp$ collision}
@@ -46,63 +41,20 @@ The angular resolution weakly depends on the width of the strips up to 25mm and 
 
 \section{Motivation}
 \label{sec:mot}
-The electromagnetic calorimeter has played an important role in experimental studies on the nuclear and particle physics.  
-% experiments specially to detect gamma. 
-Various crystals have been developed for better energy and timing resolution of the detector so far~\cite{Calorimeter}. %The most important properties of the detector are good energy and timing resolution, and various crystals has been developed for the purpose[] .
-On the other hand, the sampling calorimeter becomes popular in large-scale high energy experiment mainly due to its cost-effectiveness. The sampling calorimeter consists of alternating passive converters that generate the electromagnetic shower and active counters that obtain information on it. Since the energy-deposit in the passive convert can not be measured, its fluctuation, called sampling fluctuation, determines the energy resolution of the  calorimeter, which is generally worth than that of the detector made of crystals.
-%mainly determined by the  which causes a limitation of energy resolution,  
-%Even though the energy deposit in the passive converter is not detected which is related to the 
-%measuring energy deposit of the shower particles tends to replace the crystal calorimeter in large-scale high energy experiment[].
-%Due to the fluctuation of energy deposit in the converter, sampling fluctuation, the sampling calorimeter suffers poor energy resolution. 
-It is possible, however, to optimize configuration of a large-size detector by selecting the converters and the counters among various candidates those are easily fabricated with low costs. A 5m-long cylindrical calorimeter made of alternating lead and plastic scintillating plates is an example of the sampling calorimeter~\cite{E391a_barrel}.
+The EM calorimeter has played an important role in experimental studies on the nuclear and particle physics. Various materials have been developed for better energy and timing resolution so far~\cite{Calorimeter}. On the other side, the sampling calorimeter becomes popular in the large-scale high energy experiment mainly due to its cost-effectiveness. The sampling calorimeter consists of alternating passive converters that generate the EM shower and active counters that measure the energy deposit. Since the energy deposit in the passive convert is not measured, the fluctuation of energy deposits in the converter and the counter, called sampling fluctuation, determines the energy resolution of the  calorimeter. The sampling fluctuation can be optimized by combining the converter and the counter with a specific portion. A 5-m-long cylindrical calorimeter made of alternating lead and plastic scintillating plates is an example of the sampling calorimeter~\cite{E391a_barrel}.
 
-%The active counter can be selected as an easily fabricated in large size with relatively low cost such as the plastic scintillator~\cite{E391a_barrel}. %In addition, the fluctuation becomes not so important for high energy gammas owing to large number of shower particles. %When we use a plastic scintillator as a counter, we can fabricate a large scale of calorimeter with relatively low cost.  
-%There are many efforts to develop new types of calorimeter, and a fine-segmented sampling calorimeter is in the line[]. 
+The layer structure of the sampling calorimeter enables us to measure the individual profile of the shower along to the beam direction, and the incident angle can be estimated by correlating energy deposits on neighboring layers. The measurement of the incident angle largely benefits the background rejection. Of particular, The incident angle will be an important tool for the KOTO experiment~\cite{KOTOproposal}.
 
-A layer structure of the sampling calorimeter enables us to measure the individual profiles of the shower along to the accumulating direction, and we can estimate the direction of incident gamma by connecting the center of them. When we  decide momentum vector of incident $\gamma$ by using only the calorimeter, it is expected more reliable event reconstruction with better background rejection. In a particular experiment, KOTO, aiming to detect the final state existing only single $\pi^0$ without any other particles, the experimental method will be an important tool for the successful measurement.
+Since the EM shower is evolving via stochastic processes, the incident angle would be reconstructed with a certain angular resolution. Energy deposits from random processes are used to reconstruct the incident angle with the machine learning, which provides better angular resolution. The evolution of the EM shower is generated with the GEANT4 and $\XGB$ was used to reconstruct the incident angle.
 
-%Even though the sampling fluctuation makes limitation on the energy resolution in this energy range, there is a merit to construct momentum vector of $\gamma$ by using only the calorimeter without additional
-
-
-%We studied a possible detector configuration to measure incident direction of gamma with energies in a range from hundred MeV to few GeV. 
-%measure not only energy but also incident angle of photon. Considering a stochastic process in shower generation, there is a certain limitation of the detection resolution. Also, the effect of the sampling fluctuation is a matter in medium energy photons in range 100 MeV to few GeV photons. 
- %information about its generation position. Since the $  Participating in event reconstruction 
-
-%experiment to have a motivation on developing a detector configuration enable to measure the incident direction.
-
-The KOTO experiment, being performed at the J-PARC in Japan, aims at searching for the $K_L \rightarrow \pi^0 \nu \bar{\nu}$ decay~\cite{KOTOproposal}.  This decay is very clean in theoretical calculatio and has a large potential to access the new physics beyond the Standard Model~\cite{NewPhys}. However, current experimental sensitivity is still far from the SM expectation mainly due to its extremely small branching fraction and very weak kinematic condition to define a signature of the decay\cite{KOTO}. 
-
-Considering negligibly small detection efficiency on neutrinos, the $K_L \rightarrow \pi^0 \nu \bar{\nu}$ decay is defined as an event existing only single $\pi^0$ in the final sate, which is reconstructed by detecting two gammas generated from prompt decay of the $\pi^0$. The KOTO utilizes undoped Cesium Iodide (CsI) crystals to measure the incident energies and positions of the $\gamma$~\cite{CsI}. %An hermetic detector system surrounding decay region confirms that there is no any particles accompanying the two photons. 
-In order to reconstruct $\pi^0$ from the detected two $\gamma '$s, we need an assumption that they are generated from the single $\pi^0$ decaying at the beam axis. This assumption works correctly with $K_L$ beam having small-size cross-section and hermetic veto counters assuring the two-$\gamma$ final state 
-
-There are, however, large amount of background events have a possibility to become the two-$\gamma$ final state because of various reasons. For example, the $K_L \rightarrow \pi^0 \pi^0$ decay will be the two-$\gamma$ event when we can not detect additional two $\gamma$'s due to limited detection efficiency of detectors. Considering the 8 orders of larger branching ratio of the $K_L \rightarrow \pi^0 \pi^0$ decay compared to that of the $K_L \rightarrow \pi^0 \nu \bar{\nu}$, it is a challenging to achieve the required detection efficiency which is closely connected to the achievable experimental sensitivity in terms of accidental loss. If the remained two $\gamma$'s are generated from different $\pi^0$, the reconstructed $\pi^0$ will be differ from another results from obtained by newly obtained the momentum vectors. We can reject so-called odd-pairing  of the $K_L \rightarrow \pi^0 \pi^0$ decays.
-%without strict veto requirement.
-%strict detection efficiency of the additional $\gamma$'s.
-
-In addition, small fraction of neutrons those are dominant component of the $K_L$, can interact with detectors and produce $\pi^0$ or two-$\gamma$-like events. Those events are rejected by the shower shape analysis looking into energy sharing among the finely segmented CsI crystals, and the rejection power will be greatly improved if we could use the additional information on the $\gamma$'s.   
-
-%$contaminated  
-
-%considerable background event still be the two-$\gamma$ final state 
-
-
-%There as in addition to the detection variables. This means that we would get a wrong $\pi^0$ in case the assumption is not correct any more, but there is no information to figure out, unfortunately. With a new information, incident angle, we can judge a validity of the reconstructed $\pi^0$.
-%In order to reconstruct a  $\pi^0$ from obtained information of the two gammas 
-%In reality, energies and positions of two photons measured at the EM-Cal are not enough to reconstruct the $\pi^0$, and we need an assumption that they are generated from the $\pi^0$ decaying at the beam axis. This reconstruction would be failed in case the assumption is not correct any more, but there is no information to figure out, unfortunately. 
-% In addition to the current reconstruction of $\pi^0$, we can extract its decay position independently with the angle measurement. By requiring a consistency between two vertices reconstructed with different observables, we can select genuine single $\pi^0$ decay rejecting wrong pairs due to various sources such as odd-pairing of $K_L \rightarrow \pi^0 \pi^0$ decays, neutron induced two clusters, and so on. It also enables us to remove $\pi^0$ and $\eta$ decays produced by halo neutrons because they occur far from the beam axis. We can expect similar rejection against $K_L \rightarrow \gamma \gamma$ decays when the $K_L$ deviate form the beam center due to scattering. 
-
-%For the angle measurement of gamma, we should get information about the spatial profile of shower particles generated in the EM-Cal. This will be realized by recording energy deposit to the cell of detector separately, which are finely segmented in three dimensions. 
-Since the electromagnetic shower development is a stochastic process, there should be a limitation on the resolution of the measurement. We have studied about the angle measure with a sampling calorimeter consisting of alternating lead sheets and strips of plastic scintillator. The have performed an feasibility study on the angle measurement to estimate feasibility  achievable angular resolution in ballpark figure and clarify the items we have to solve for better performance.
-
-%the angular measurement of incident gamma. %could be a good candidate of the calorimeter as describe in this paper.
+The sec~\ref{sec:ems} sec~\ref{sec:res} sec~\ref{sec:sum}
 In the following section, the configuration of detector and Monte Carlo simulation for electromagnetic shower generation will be given. In the section III, we will describe how to reconstruct incident angle from the generated detector response by using one of the most attractive toolkit of the machine learning; $\XGB$. Finally, we will summarize our study briefly.
 
 \section{ELECTROMAGNETIC SHOWER}
-We started the study with a detector setup consisting of alternating lead sheet as the passive converter and strips of the plastic scintillator as the active counter. % as shown in Fig.~\ref{fig:det_conf}. The electromagnetic shower mainly generated at the lead sheet (passive component) due to its short radiation length ($X_0 = 5.6~{\rm mm})$ and the information of the shower particles is obtained by using the scintillator (active  component). 
-The thickness of lead is 1 mm and scintillator is 5 mm, respectively. The lead sheet has a cross-section of  500 mm $\times$ 500 mm and each scintillator strips of 500 mm $\times$ 15 mm  being arranged along the X- and Y-direction alternatively along Z-direction as shown in  Fig.~\ref{fig:det_conf}. Total number of alternating layers is 105 which corresponds to 20 radiation length (20 Xo) and possible to contain all of the shower particles generated by $\gamma$ in the region of medium energy (from  100 MeV to few GeV). 
+\label{sec:ems}
+We started the study with a detector setup consisting of alternating lead sheet as the passive converter and strips of the plastic scintillator as the active counter. The thickness of lead is 1 mm and scintillator is 5 mm, respectively. The lead sheet has a cross-section of  500 mm $\times$ 500 mm and each scintillator strips of 500 mm $\times$ 15 mm  being arranged along the X- and Y-direction alternatively along Z-direction as shown in  Fig.~\ref{fig:det_conf}. Total number of alternating layers is 105 which corresponds to 20 radiation length (20 Xo) and possible to contain all of the shower particles generated by $\gamma$ in the region of medium energy (from  100 MeV to few GeV). 
  
 \begin{figure}[!hbt]
-%\includegraphics[width=0.85\textwidth]{figures/Sec2/ang_conf.pdf}
 \includegraphics[width=0.85\textwidth]{figures/Sec2/Prototype_samplingcal.pdf}
 
 \caption{ The first trial of detector setup for simulation study on angle measurement. It is a sampling calorimeter consisting of alternating lead sheets and strips of plastic scintillator. }
@@ -111,74 +63,25 @@ The thickness of lead is 1 mm and scintillator is 5 mm, respectively. The lead s
 
 The generation of incident $\gamma$ and its interaction with detector materials was simulated by using the GEANT4 package (ver. xxx) with the standard EM sub-packages~\cite{GEANT4}.
 The $\gamma$ entered the center of the detector and moved to the positive direction of Z-axis, where the surface of the first layer is defined as a starting point (Z=0). Its incident angle is defined as the polar angle ($\theta$) along to the Z-direction, that is, $\theta = 0$ for the $\gamma$ enters perpendicular to the detector surface. %The generated energies are in range from hundred MeV to few GeV which is interested to the KOTO experiment. 
-Figure~\ref{fig:Evt_Dis} shows a typical event display describing the energy deposit to the each scintillator strips in both of X-Z and Y-Z plane for 1-GeV $\gamma$ entering in perpendicular to the center of the detector ($\theta=0$ and $\phi=0$). %We can get an three-dimensional information on the shower development combining them and will use them as inputs of the machine learning package, $\XGB$. 
-%This information indicates the shower development, and will be used as an input of the machine learning package, $\XGB$. 
-%We can get the shower profiles from energy deposits in individual strips arranged in the 3-dimension. Figure XXX shows a event display for 1 GeV gamma entering with $\theta =0$ in X-Z and Y-Z planes. The amount of energy deposit to each strips are expressed by the darkness (color online). 
+Figure~\ref{fig:Evt_Dis} shows a typical event display describing the energy deposit to the each scintillator strips in both of X-Z and Y-Z plane for 1-GeV $\gamma$ entering in perpendicular to the center of the detector ($\theta=0$ and $\phi=0$).
 
 
 \begin{figure}[!hbt]
-%\includegraphics[width=0.85\textwidth]{figures/Sec2/ang_conf.pdf}
 \includegraphics[width=0.45\textwidth]{figures/EventDisplay.jpg}
 \includegraphics[width=0.45\textwidth]{figures/EventDisplay.jpg}
-
 \caption{Distribution of energy deposit to the each scintillator strips in X-Z plane (Left) and Y-Z plane (Right) for 1-GeV $\gamma$ entering perpendicularly to the detector ($\theta=0$ and $\phi=0$).}
 \label{fig:Evt_Dis}
 \end{figure}
 
-%With the configuration, we can get shower profiles in X- and Y-axis in turn, and estimate the incident angle from the
-
-%energies are in range from hundred MeV to few GeV by considering the KOTO experiment. 
-
-%its origin is defined as the centers of the central strips both of the X- and Y- There generation position is the centers of both of the X- and Y- strip moves along with Z-direction and its incident angle was defined as a polar angle to the direction.  With the configration, we can get shower profiles in X- and Y-axis in turn, and estimate the incident angle from them.%The electromagnetic showers are generated with given detector setup by using the GEANT4 package (ver. xxx) with the standard EM sub-packages ~\cite{GEANT4}. 
-
-
-%{\it I will describe the coordinator and the gamma enter to the center of strips}
-%The contribution of the hadronic interaction is taken into account with $\rm{FTFP\_BERT}$ package. The materials used in detector construction are selected from the Geant4 NIST material database: $\rm{G4\_Pb}$ for the lead and $\rm{G4\_PLASTIC\_SC\_VINYLTOLUENE}$ for the scintillator material.
-
-
-
-%\subsection{Properties of generated shower}
-% moliere rad, visible ratio graph
-% energy resolution (+as a function of E)
-% gamma beam energy에 따라 backsplash가 만드는 event veto
-% + incident angle에 따라?
-%Figure \ref{fig:EMshower} shows shower profiles in X-Z plane (right) and Y-Z plane (middle), those are accumulated energy deposit on each strips for 10,000 gammas of energy as 1 GeV.
-%longitudinal (right) and lateral (left) shower development for 1 GeV photon entering perpendicular to the detector surface $(\theta~=0)$). 
-
-%Figure~\ref{fig:EMshower} shows side (left) and top view (right) of energy deposit in the each strips for $\gamma$ entering the center of the detector with energy of 1 GeV and incident angle of 10 degrees and azimuthal angle of 0 degree . By using this profiles along with the alternating X- and Y-direction, we can reconstruct incident angle of the $\gamma$ after studying its nature with the $\XGB$ package. 
-
-The GRANT4 can provide reliable results on the electromagnetic shower produced by the incident $\gamma$. 
-%by usis well produced by showers show typical distributions both of longitudinal and transverse directions. Figure~\ref{fig:Longitudinal} shows longitudinal distribution of average sum of the energy deposit in strips of each counter layers regardless the direction of arrangement. %Considering the EM shower is generated mainly at the converter, the both distributions of the converter and counter are identical and can be expressed by two parameters, 
-Its longitudinal profile depends on incident energy and can be expressed \cite{Longo} by the three parameters as following;
-%When we ignore large radiation of the scintillator, the profile can
-%projection (left in Fig.\ref{fig:EMshower}) %roduced by gamma of energy as $E_0$ 
-%can be expressed by two parameters $\alpha$ and $\beta$ as %{ref:E. Longo, I. Sestili, Nucl. Instrum. Meth. 128 (1975) 283 }
+The GRANT4 can provide reliable results on the electromagnetic shower produced by the incident $\gamma$. Its longitudinal profile depends on incident energy and can be expressed \cite{Longo} by the three parameters as following;
 \begin{equation}
     F(E,t)=A  t^\alpha e^{-bt},
-    %F(E,t)=E_0\cdot t^{\alpha}e^{-\beta t},
 \end{equation}
 where t is the position of scintillator strips along the Z-direction. As shown in Fig.~\ref{fig:Longitudinal}, the Eq. 1 describes the obtained average energy deposit on each layer of scintillator strips reasonably. In the case of the sampling calorimeter, however, the energy deposit on the converters and counters is caused by multiple processes and its fraction is changed along with the shower develpoment.
-%is changed according to the shower depth because there is a change of energy depositing process. 
-%and uwe focus only on the energy deposit 
-%the probability of the shower generation is much different between the counter and converter.
-As a result, the ratio of the energy deposit in counter and in converter changes according to the layer position as shown in Fig.~\ref{fig:Longitudinal} (right).% because there are multiple process of which probability changes according to development.
-In order to describe the shower profile in the sampling calorimeter, we need to take into account the layer dependent of the energy deposit. Since we will use the simulated results only for current study on angle measurement, we did not proceed any further analytic study on the process.
-%As a results, the Eq. 1 needs an additional correction factor ... to express the obtained results more correctly. %We can take into account the changes by using layer-by-layer structure of the detector.   %({\it Shall we investigate energy dependency of the parameters ?)}% Considering the EM shower is generated mainly at theIt is natural that the distributions on converter and counter are identical. 
-%When we consider detector response for large number of gamma, it is needed another contribution $t_0$ which is the starting position of shower generation. Then the equation 1 becomes as
-%\begin{equation}
-    %F(E,t)=E_0\cdot b(bt)^{a-1}e^{-bt}/\Gamma(a),
-%    F(E,t,t_0)=E_0\cdot e^{-t_0 / X_0} (t-t_0)^{\alpha}e^{-\beta (t-t_0)},
-%\end{equation}
-%or
-%\begin{equation}
-    %F(E,t)=E_0\cdot b(bt)^{a-1}e^{-bt}/\Gamma(a),
-%    F(E,t)= \integral { E_0\cdot e^{-t_0 / X_0} (t-t_0)^{\alpha}e^{-\beta (t-t_0)}},
-%\end{equation}
-%The parameters are estimated for given detector with 1 GeV $\gamma$ as a= and b=, respectively.
+
+As a result, the ratio of the energy deposit in counter and in converter changes according to the layer position as shown in Fig.~\ref{fig:Longitudinal} (right). In order to describe the shower profile in the sampling calorimeter, we need to take into account the layer dependent of the energy deposit. Since we will use the simulated results only for current study on angle measurement, we did not proceed any further analytic study on the process.
 
 \begin{figure}[!hbt]
-%\includegraphics[width=0.85\textwidth]{figures/Sec2/EMshower.pdf}
-%\includegraphics[width=0.85\textwidth]{figures/Sec2/ang_conf.pdf}
 \includegraphics[width=0.48\textwidth]{figures/LongProfile.jpg}
 \includegraphics[width=0.48\textwidth]{figures/LayerVisibleRatio.jpg}+
 \caption{Generated average energy deposit on the scintillator strips along Z axis(left) and visible ratio for each layer.}
@@ -193,8 +96,6 @@ R_M= 21.2~{\rm MeV}\cdot X_0 /E_c,
 \end{equation}
 where $X_0$ is the radiation length and $E_c$ is the critical energy of the detector, respectively. 
 Since the sampling calorimeter contains different materials placed at the different localized positions, we defined the $R_M$ as the radius of cylinder containing 90\% of the energy deposit instead of using the Eq. (2). The left panel of Figure~\ref{fig:Moliere_vis} shows energy deposit per each layer (black line) and integrated energy deposit up to the layers. We can deduce the Molière radius as 70 mm, which is largely depends on the position of its measurement. The right panel of Figure~\ref{fig:Moliere_vis} shows the radius as a function of scintillator layer, which increases along the shower depth. The first three bins show large radius because of large contribution of shower particles generated opposite to the incident direction.    
-
-%difference of $\rho_M$ for different configurations of the detector and its dependency on the detector layer. We need to notice the spread of shower is different along to the its development similar to the ratio of the energy deposit mentioned above. We can take into account the complicated response of the sampling calorimeter by using the individual energy deposit of the strips as inputs of the machine learning for the angle reconstruction.  
 
 \begin{figure}[!hbt]
 \includegraphics[width=0.44\textwidth]{figures/Edep_R.jpg}
@@ -538,6 +439,7 @@ The obtained angular resolution is determined by combined multiple sources, main
 %The $\theta$ reconstruction dependencies on the incident angle and the incident energy are studied. Figure~\ref{fig:angle_reco_dep} shows the reconstructed $\theta$ with respect to the incident angle and the incident energy with different line colors and styles. The incident angle dependence of the reconstruction is found to be not significant for higher $E_{\gamma}>$~500~MeV and appears at lower $E_{\gamma}=$~200~MeV. The dependence on the incident energy can be clearly seen for all $\theta_{\rm{true}}$. The reconstruction for $\theta_{\rm{true}}=$~5~deg with lower $E_{\gamma}<$~200~MeV has a shifted maximum point due to their large standard deviations.
 
 \section{SUMMARY}
+\label{sec:sum}
 We studied a possibility to measure incident angle of the medium-energy $\gamma$ by using a finely segmented sampling calorimeter. With the configuration of alternation 1-mm thick lead sheets and 5-mm thick plastic scintillators, it will measure the energy for 1-GeV $\gamma$ with 4$\%$ of resolution which is mainly determined by the sampling fluctuation. 
 
 For the angular measurement, we need to optimize detector configuration such as width of strips and number of layers. Also, the angular resolution is strongly depends on the goodness of the training of the $\XGB$ which depends on the number of training sample. For a case study of 15-mm strip width and 24 layers, we can achieve the angular resolution as 1.2 degrees with 94$\%$ efficiency. It depends on the incident energy of the $\gamma$, which will limit strictly on the applicable ranger of the measurement. 
