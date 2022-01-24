@@ -54,7 +54,7 @@ In sec~\ref{sec:ems}, generic explanation of the EM shower and its evolution are
 
 \begin{figure}[!hbt]
 \includegraphics[width=0.85\textwidth]{figures/Sec2/Prototype_samplingcal.pdf}
-\caption{ \textcolor{red}{plots should be updated} Schematic view of the sampling calorimeter. It consists of alternating lead plates and scintillator strips.  }
+\caption{ \textcolor{red}{plots should be updated} Schematic view of the sampling calorimeter. It consists of 105 alternating lead plates and scintillator strips. Each scintillator layer consists of 35 scintillator strips. The cross section of each 1-mm-thick lead plate is 525 mm $\times$ 525 mm. The cross section of each 5-mm-tihck scintillator strip is 525 mm $\times$ 15 mm. }
 \label{fig:det_conf}
 \end{figure}
 
@@ -100,12 +100,12 @@ f(x; \mu, \alpha, \beta) = \frac{\beta}{2 \alpha \Gamma(1/\beta)}e^{-(|x-\mu|/\a
 The variation of the GG function can be expressed as, then, $\sigma^2 \equiv \alpha^2 \Gamma(3/\beta) / \Gamma(1/\beta)$. The angular resolution of the incident angle reconstruction is defined as $\sigma$.
 
 \begin{figure}[!hbt]
-\includegraphics[width=0.89\textwidth]{figures/Fig1_reco_def.pdf}
-\caption{\textcolor{red}{plots should be updated} The angular resolution for the varying AAA and the varying BBB. The best angular resolution is obtained with AAA=XXX and BBB=YYY.  }
+\includegraphics[width=0.89\textwidth]{figures/optimization_plot.pdf}
+\caption{The angular resolution for the varying N\_estimators and the varying Max. depth. The best angular resolution is obtained with N\_estimators=300 and Max. depth=100.  }
 \label{fig:par_scan}
 \end{figure}
 
-As the reconstruction of the incident angle depends on hyperparameters of the $\XGB$, which controls the details of training processes, dedicated tests to optimize the hyperparameter were executed. It is assumed that a set of hyperperameters providing the best angular resolution would be optimized. The test scans the evaluated angular resolution with different hyperparameters. Figure~\ref{fig:par_scan} shows the result of the test for AAA and BBB. The AAA works for *******, and the BBB works for *****. The AAA and BBB are determined to be XXX and YYY, respectively. Different tests determine the set of hyperparameters, which is shown in Tab~\ref{tab:XgbPar}.
+As the reconstruction of the incident angle depends on hyperparameters of the $\XGB$, which controls the details of training processes, dedicated tests to optimize the hyperparameter were executed. It is assumed that a set of hyperperameters providing the best angular resolution would be optimized. The test scans the evaluated angular resolution with different hyperparameters. Figure~\ref{fig:par_scan} shows the result of the test for N\_estimators and Max. depth. N\_estimators defines allowed maximal number of decision trees, and the Max. depth defines complexity of the structure of decision trees. The N\_estimators and Max. depth are determined to be 300 and 100, respectively. Similar tests are applied to different hyperparameters, and definitive values for each hyperparameter are shown in Tab~\ref{tab:XgbPar}.
  
 \begin{table}[hbt!]
 \centering
@@ -113,10 +113,10 @@ As the reconstruction of the incident angle depends on hyperparameters of the $\
 \begin{tabular}{cccc}
 \hline 
 Parameter & Function & Default value & Used value \\ \hline 
-N\_estimators & The number of decision trees & N.A. & 1000 \\  
+N\_estimators & The number of decision trees & N.A. & 300 \\  
 Max. depth & Possible maximum depth of tree structure & 6 & 100 \\ 
-Subsample & Fraction of total data used for a single decision & 1 & 1 \\ 
-Learning rate & Step length for calculation & 0.3 & 0.08 \\ 
+Subsample & Fraction of total data used for a single decision & 1 & 0.8 \\ 
+Learning rate & Step length for calculation & 0.3 & 0.02 \\ 
 Gamma & Requirement on minimum loss function & 0 & 0 \\ 
 \hline
 \end{tabular}
