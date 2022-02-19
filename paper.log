@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.10.6)  19 FEB 2022 15:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.10.6)  19 FEB 2022 15:36
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -71,7 +71,7 @@ File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
 \@sep=\skip49
 \@@sep=\skip50
 
-(/usr/local/texlive/2020/texmf-dist/tex/latex/natbib/natbib.sty
+(./paper.spl) (/usr/local/texlive/2020/texmf-dist/tex/latex/natbib/natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
 \bibhang=\skip51
 \bibsep=\skip52
@@ -82,8 +82,7 @@ LaTeX Info: Redefining \cite on input line 694.
 \openout3 = `paper.spl'.
 
 \appnamewidth=\dimen141
-)
-(/usr/local/texlive/2020/texmf-dist/tex/latex/txfonts/txfonts.sty
+) (/usr/local/texlive/2020/texmf-dist/tex/latex/txfonts/txfonts.sty
 Package: txfonts 2008/01/22 v3.2.1
 LaTeX Font Info:    Redeclaring symbol font `operators' on input line 21.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
@@ -1119,12 +1118,14 @@ LaTeX Font Info:    Font shape `MDB/mdbch/m/n' will be
 (Font)              scaled to size 4.80003pt on input line 61.
 LaTeX Font Info:    Font shape `T1/mdbch/m/n' will be
 (Font)              scaled to size 6.72005pt on input line 61.
+LaTeX Font Info:    Font shape `T1/mdbch/m/it' will be
+(Font)              scaled to size 9.60007pt on input line 61.
+LaTeX Font Info:    Font shape `T1/cmtt/m/n' will be
+(Font)              scaled to size 10.72006pt on input line 61.
 LaTeX Font Info:    Font shape `T1/mdbch/m/n' will be
 (Font)              scaled to size 16.58891pt on input line 61.
 LaTeX Font Info:    Font shape `T1/mdbch/m/n' will be
 (Font)              scaled to size 7.68005pt on input line 61.
-LaTeX Font Info:    Font shape `T1/mdbch/m/it' will be
-(Font)              scaled to size 9.60007pt on input line 61.
 LaTeX Font Info:    Font shape `T1/mdbch/m/it' will be
 (Font)              scaled to size 6.72005pt on input line 61.
 
@@ -1136,7 +1137,7 @@ Overfull \hbox (2.15425pt too wide) has occurred while \output is active
 
 
 {/usr/local/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-<figures/FullLayer_3.jpeg, id=14, 1806.75pt x 1204.5pt>
+<figures/FullLayer_3.jpeg, id=15, 1806.75pt x 1204.5pt>
 File: figures/FullLayer_3.jpeg Graphic file (type jpg)
 <use figures/FullLayer_3.jpeg>
 Package pdftex.def Info: figures/FullLayer_3.jpeg  used on input line 79.
@@ -1147,24 +1148,24 @@ Overfull \hbox (17.42354pt too wide) in paragraph at lines 84--85
  a 5-mm-thick polyvinyltoluene-
  []
 
-<figures/SingleEventXZHit.pdf, id=15, 569.12625pt x 387.4475pt>
+<figures/SingleEventXZHit.pdf, id=16, 569.12625pt x 387.4475pt>
 File: figures/SingleEventXZHit.pdf Graphic file (type pdf)
 <use figures/SingleEventXZHit.pdf>
 Package pdftex.def Info: figures/SingleEventXZHit.pdf  used on input line 89.
 (pdftex.def)             Requested size: 200.75996pt x 136.6728pt.
-<figures/SingleEventYZHit.pdf, id=16, 569.12625pt x 387.4475pt>
+<figures/SingleEventYZHit.pdf, id=17, 569.12625pt x 387.4475pt>
 File: figures/SingleEventYZHit.pdf Graphic file (type pdf)
 <use figures/SingleEventYZHit.pdf>
 Package pdftex.def Info: figures/SingleEventYZHit.pdf  used on input line 90.
 (pdftex.def)             Requested size: 200.75996pt x 136.6728pt.
 [1] [2 <./figures/FullLayer_3.jpeg> <./figures/SingleEventXZHit.pdf, page is ro
 tated 90 degrees> <./figures/SingleEventYZHit.pdf, page is rotated 90 degrees>]
-<figures/GG_fit.jpg, id=109, 993.7125pt x 725.71124pt>
+<figures/GG_fit.jpg, id=110, 993.7125pt x 725.71124pt>
 File: figures/GG_fit.jpg Graphic file (type jpg)
 <use figures/GG_fit.jpg>
 Package pdftex.def Info: figures/GG_fit.jpg  used on input line 104.
 (pdftex.def)             Requested size: 292.77629pt x 213.8172pt.
-<figures/optimization_plot.pdf, id=110, 569.12625pt x 387.4475pt>
+<figures/optimization_plot.pdf, id=111, 569.12625pt x 387.4475pt>
 File: figures/optimization_plot.pdf Graphic file (type pdf)
 <use figures/optimization_plot.pdf>
 Package pdftex.def Info: figures/optimization_plot.pdf  used on input line 117.
@@ -1175,13 +1176,13 @@ Overfull \hbox (54.88275pt too wide) in paragraph at lines 127--138
  [][] 
  []
 
-<figures/res_width.jpg, id=115, 952.55875pt x 707.64375pt>
+<figures/res_width.jpg, id=116, 952.55875pt x 707.64375pt>
 File: figures/res_width.jpg Graphic file (type jpg)
 <use figures/res_width.jpg>
 Package pdftex.def Info: figures/res_width.jpg  used on input line 141.
 (pdftex.def)             Requested size: 242.58789pt x 180.21461pt.
 [4 <./figures/optimization_plot.pdf, page is rotated 90 degrees>]
-<figures/Fig5_reco_graph.pdf, id=141, 569.12625pt x 410.53375pt>
+<figures/Fig5_reco_graph.pdf, id=142, 569.12625pt x 410.53375pt>
 File: figures/Fig5_reco_graph.pdf Graphic file (type pdf)
 <use figures/Fig5_reco_graph.pdf>
 Package pdftex.def Info: figures/Fig5_reco_graph.pdf  used on input line 152.
@@ -1190,7 +1191,7 @@ File: figures/Fig5_reco_graph.pdf Graphic file (type pdf)
 <use figures/Fig5_reco_graph.pdf>
 Package pdftex.def Info: figures/Fig5_reco_graph.pdf  used on input line 152.
 (pdftex.def)             Requested size: 200.75996pt x 144.81653pt.
-<figures/Fig5_reco_inc.pdf, id=142, 569.12625pt x 410.53375pt>
+<figures/Fig5_reco_inc.pdf, id=143, 569.12625pt x 410.53375pt>
 File: figures/Fig5_reco_inc.pdf Graphic file (type pdf)
 <use figures/Fig5_reco_inc.pdf>
 Package pdftex.def Info: figures/Fig5_reco_inc.pdf  used on input line 154.
@@ -1201,7 +1202,7 @@ Package pdftex.def Info: figures/Fig5_reco_inc.pdf  used on input line 154.
 (pdftex.def)             Requested size: 200.75996pt x 144.81653pt.
  [5 <./figures/res_width.jpg> <./figures/Fig5_reco_graph.pdf, page is rotated 9
 0 degrees> <./figures/Fig5_reco_inc.pdf, page is rotated 90 degrees>]
-<figures/res_Nlayer.jpg, id=233, 952.55875pt x 707.64375pt>
+<figures/res_Nlayer.jpg, id=234, 952.55875pt x 707.64375pt>
 File: figures/res_Nlayer.jpg Graphic file (type jpg)
 <use figures/res_Nlayer.jpg>
 Package pdftex.def Info: figures/res_Nlayer.jpg  used on input line 164.
@@ -1210,7 +1211,7 @@ File: figures/res_Nlayer.jpg Graphic file (type jpg)
 <use figures/res_Nlayer.jpg>
 Package pdftex.def Info: figures/res_Nlayer.jpg  used on input line 164.
 (pdftex.def)             Requested size: 200.75996pt x 149.13866pt.
-<figures/resol_Nlayer.jpg, id=234, 952.55875pt x 707.64375pt>
+<figures/resol_Nlayer.jpg, id=235, 952.55875pt x 707.64375pt>
 File: figures/resol_Nlayer.jpg Graphic file (type jpg)
 <use figures/resol_Nlayer.jpg>
 Package pdftex.def Info: figures/resol_Nlayer.jpg  used on input line 166.
@@ -1219,7 +1220,7 @@ File: figures/resol_Nlayer.jpg Graphic file (type jpg)
 <use figures/resol_Nlayer.jpg>
 Package pdftex.def Info: figures/resol_Nlayer.jpg  used on input line 166.
 (pdftex.def)             Requested size: 200.75996pt x 149.13866pt.
-<figures/layer-event.jpg, id=235, 931.48pt x 666.49pt>
+<figures/layer-event.jpg, id=236, 931.48pt x 666.49pt>
 File: figures/layer-event.jpg Graphic file (type jpg)
 <use figures/layer-event.jpg>
 Package pdftex.def Info: figures/layer-event.jpg  used on input line 174.
@@ -1233,36 +1234,33 @@ Overfull \hbox (63.67552pt too wide) in paragraph at lines 195--196
 (./paper.bbl [7 <./figures/layer-event.jpg>]
 LaTeX Font Info:    Font shape `T1/cmtt/m/n' will be
 (Font)              scaled to size 12.86407pt on input line 37.
-) [8] (./paper.aux)
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
+) [8] (./paper.aux) ) 
 Here is how much of TeX's memory you used:
- 10154 strings out of 480608
- 161392 string characters out of 5903630
- 484646 words of memory out of 5000000
- 25792 multiletter control sequences out of 15000+600000
- 590967 words of font info for 149 fonts, out of 8000000 for 9000
+ 10152 strings out of 480608
+ 161353 string characters out of 5903630
+ 484606 words of memory out of 5000000
+ 25787 multiletter control sequences out of 15000+600000
+ 591280 words of font info for 150 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  38i,9n,45p,1120b,313s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}
-{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/ly1/texnansi.enc}</usr/loca
-l/texlive/2020/texmf-dist/fonts/type1/bitstrea/charter/bchb8a.pfb></usr/local/t
-exlive/2020/texmf-dist/fonts/type1/bitstrea/charter/bchr8a.pfb></usr/local/texl
-ive/2020/texmf-dist/fonts/type1/bitstrea/charter/bchri8a.pfb></usr/local/texliv
-e/2020/texmf-dist/fonts/type1/public/mathdesign/mdbch/md-chr7m.pfb></usr/local/
-texlive/2020/texmf-dist/fonts/type1/public/mathdesign/mdbch/md-chr7t.pfb></usr/
-local/texlive/2020/texmf-dist/fonts/type1/public/mathdesign/mdbch/md-chr7v.pfb>
-</usr/local/texlive/2020/texmf-dist/fonts/type1/public/mathdesign/mdbch/md-chr7
-y.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/mathdesign/mdbch/m
-d-chr8t.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/mathdesign/m
-dbch/md-chri7m.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/cm-su
-per/sftt1200.pfb>
-Output written on paper.pdf (9 pages, 2053594 bytes).
+{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/cm-sup
+er/cm-super-t1.enc}{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/ly1/texn
+ansi.enc}</usr/local/texlive/2020/texmf-dist/fonts/type1/bitstrea/charter/bchb8
+a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/bitstrea/charter/bchr8a.p
+fb></usr/local/texlive/2020/texmf-dist/fonts/type1/bitstrea/charter/bchri8a.pfb
+></usr/local/texlive/2020/texmf-dist/fonts/type1/public/mathdesign/mdbch/md-chr
+7m.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/mathdesign/mdbch/
+md-chr7t.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/mathdesign/
+mdbch/md-chr7v.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/mathd
+esign/mdbch/md-chr7y.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public
+/mathdesign/mdbch/md-chr8t.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/
+public/mathdesign/mdbch/md-chri7m.pfb></usr/local/texlive/2020/texmf-dist/fonts
+/type1/public/cm-super/sftt1000.pfb></usr/local/texlive/2020/texmf-dist/fonts/t
+ype1/public/cm-super/sftt1200.pfb>
+Output written on paper.pdf (9 pages, 2074495 bytes).
 PDF statistics:
- 282 PDF objects out of 1000 (max. 8388607)
- 144 compressed objects within 2 object streams
+ 286 PDF objects out of 1000 (max. 8388607)
+ 147 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  56 words of extra memory for PDF output out of 10000 (max. 10000000)
 
