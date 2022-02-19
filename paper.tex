@@ -1,31 +1,50 @@
-\documentclass[jkps,preprint,fleqn,showpacs,showkeys]{revtex4}
+\documentclass[preprint,12pt,times,a4paper]{elsarticle}
 
 \usepackage{graphicx}
 \usepackage{amssymb}
 \usepackage{amsmath}
-\usepackage{bm}
 \usepackage{lineno}
 \usepackage{xspace}
+\usepackage{lipsum}
 \usepackage{cleveref}
 \usepackage{stackengine}
+\usepackage{titlesec}
 \usepackage {xcolor}
+\usepackage[bitstream-charter]{mathdesign}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, float}
+\geometry{a4paper}
+
+\usepackage[normalem]{ulem}
+\usepackage{stackengine}
+
+\journal{Nuclear Instruments and Methods in Physics Research A}
 
 \newcommand{\XGB}{XGBoost}
 
 \begin{document}
-\setcounter{page}{0}
-\title[]{Simulation Study of Angular Resolution of a New Electromagnetic Sampling Calorimeter}
 
-\author{YoungJun \surname{Kim}}
-\author{Jung Keun \surname{Ahn}}
-\affiliation{Department of Physics, Korea University, Seoul 02841}
-\author{Junlee \surname{Kim}}
-\email{junlee.kim@cern.ch}
-\author{Eun-Joo \surname{Kim}}
-\email{ejkim@jbnu.ac.kr}
-\affiliation{Department of Physics education, Jeonbuk National University, Jeonju 54896}
-\author{GeiYoub  \surname{Lim}}
-\affiliation{IPNS/KEK Tsukuba, Japan 305-0801}
+\begin{frontmatter}
+
+\setcounter{page}{0}
+\title{Simulation Study of Angular Resolution of a New Electromagnetic Sampling Calorimeter}
+
+\author[jbnu]{Junlee~Kim\corref{cor1}}
+\ead{junlee.kim@cern.ch}
+\cortext[cor1]{Corresponding author. Tel.: +82-xxxxxxxxx.}
+\author[jbnu]{Eun-Joo~Kim\corref{cor2}}
+\ead{ejkim@jbnu.ac.kr}
+
+\author[korea]{Young~Jun~Kim}
+\author[korea]{Jung~Keun~Ahn}
+
+\cortext[cor2]{Corresponding author. Tel.: +82-xxxxxxxxx.}
+\author[kek]{Gei~Youb~Lim}
+
+
+\address[jbnu]{Division of Science Education, Jeonbuk National University, Jeonju 54896, Korea}
+\address[korea]{Department of Physics, Korea University, Seoul 02841, Korea}
+\address[kek]{Institute of Particle and Nuclear Studies (IPNS), High Energy Accelerator Research Organization (KEK), Tsukuba 305-0801, Japan}
 
 %\date[]{Received 6 August 2007}
 
@@ -34,10 +53,12 @@ We report simulation results on the angular resolution of electromagnetic (EM) s
 energy dependence can be expressed as $\sigma_{\theta}=$~xxx~$\oplus$~yyy~$/\sqrt{E_{\gamma}}$.
 
 \end{abstract}
+\begin{keyword}
+% keywords here, in the form: keyword \sep keyword
+Electromagnetic Calorimeter \sep Geant4 \sep XGBoost \sep KOTO
+\end{keyword}
 
-%\pacs{68.37.Ef, 82.20.-w, 68.43.-h}
-\keywords{Electromagnetic Calorimeter, Geant4, XGBoost, KOTO}
-\maketitle
+\end{frontmatter}
 
 \section{Motivation}
 \label{sec:mot}
@@ -168,11 +189,10 @@ We study that the angular resolution is changing with the variation of the train
 
 \label{sec:con}
 
-
 %\pagebreak
 
-\begin{acknowledgments}
-\end{acknowledgments}
+\section*{Acknowledgement}
+This paper was supported by the National Research Foundation of Korea (NRF) grants funded by the Korea government (MIST) (2019R1A2C1084552 and 2020R1A3B2079993).
 
 \bibliography{paper}
 
