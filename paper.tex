@@ -9,10 +9,13 @@
 \usepackage{cleveref}
 \usepackage{stackengine}
 \usepackage{titlesec}
-\usepackage {xcolor}
+\usepackage{xcolor}
 \usepackage[bitstream-charter]{mathdesign}
 \usepackage[T1]{fontenc}
 \usepackage{geometry, float}
+\usepackage{biblatex}
+\addbibresource{paper.bib}
+
 \geometry{a4paper}
 
 \usepackage[normalem]{ulem}
@@ -76,7 +79,7 @@ This paper describes a machine learning approach based on XGBoost (XGB) model~\c
 
 \begin{figure}[!hbt]
 \centering
-\includegraphics[width=0.6\textwidth]{figures/FullLayer_3.jpeg}
+\includegraphics[width=0.6\textwidth]{figures/Fig1_detector_schematic.jpeg}
 \caption{ Schematic of the sampling calorimeter model consisting of 105 alternating layers of a Pb plate and a segmented scintillator plate in 35 strips. Each scintillator plate is oriented alternatively in horizontal and vertical directions. See text for details. }
 \label{fig:det_conf}
 \end{figure}
@@ -84,10 +87,9 @@ This paper describes a machine learning approach based on XGBoost (XGB) model~\c
 Simulation models of a sampling calorimeter were constructed as a block consisting of alternating layers of a 1-mm-thick Pb absorber and a 5-mm-thick polyvinyltoluene-based plastic scintillator. The plastic scintillator is segmented in 15-mm-wide strips, which is alternatively oriented in vertical and horizontal directions as shown in Fig.~\ref{fig:det_conf}. The sampling calorimeter model has a cross-section of 525~$\times$~525~mm$^{2}$ and accommodates 105 alternating layers of 630~mm length (20$X_{0}$), which is sufficiently long to absorb full photon energy in the range of 100~MeV to 2~GeV. 
 
 \begin{figure}[!hbt]
-%\includegraphics[width=0.45\textwidth]{figures/EventDisplay.jpg}
-%\includegraphics[width=0.45\textwidth]{figures/EventDisplay.jpg}
-\includegraphics[width=0.48\textwidth]{figures/SingleEventXZHit.pdf}
-\includegraphics[width=0.48\textwidth]{figures/SingleEventYZHit.pdf}
+\centering
+\includegraphics[width=0.48\textwidth]{figures/Fig2_EMShower_XZ.pdf}
+\includegraphics[width=0.48\textwidth]{figures/Fig2_EMShower_YZ.pdf}
 \caption{ Event display of simulated energy deposit patterns for a 1-GeV photon entering the calorimeter ($\theta=$~0) in (a) $xz$- and (b) $yz$-planes.}
 \label{fig:Evt_Dis}
 \end{figure}
@@ -102,7 +104,7 @@ data bias, the incidence angles were uniformly generated at the detector surface
 
 \begin{figure}[!hbt]
 \centering
-\includegraphics[width=0.7\textwidth]{figures/GG_fit.jpg}
+\includegraphics[width=0.7\textwidth]{figures/Fig3_fit_GG.pdf}
 \caption{ Reconstructed polar angle distribution for 1-GeV photons generated at $\theta=$~10$^{\circ}$. The distribution is fitted with the Gaussian and the Generalized Gaussian function. The later gives a better result.}
 \label{fig:angle_10degree}
 \end{figure}
@@ -115,12 +117,12 @@ f(x; \mu, \alpha, \beta) = \frac{\beta}{2 \alpha \Gamma(1/\beta)}e^{-(|x-\mu|/\a
 where $\mu$ denotes a mean value. Parameters $\alpha$ and $\beta$ determine the scale and shape of the distribution, respectively. Variance of the GG function is given by $\sigma^2 \equiv \alpha^2 \Gamma(3/\beta) / \Gamma(1/\beta)$. The angular resolution of the incidence angle reconstruction is defined as $\sigma$.
 
 \begin{figure}[!hbt]
-\includegraphics[width=0.89\textwidth]{figures/optimization_plot.pdf}
+\includegraphics[width=0.89\textwidth]{figures/Fig4_Opt.pdf}
 \caption{Angular resolutions are displayed in terms of combination of N\_estimators and Max. depth. The best angular resolution is obtained with N\_estimators~=~300 and Max. depth~=~100. }
 \label{fig:par_scan}
 \end{figure}
 
-We studied a correlation between byperparameters of the XGB model and the angular resolution. The test scans the evaluated angular resolution with different hyperparameters. Figure~\ref{fig:par_scan} shows the test results with N\_estimators and Max. depth. N\_estimators defines the maximum allowed number of decision trees to be developed, and the Max. depth defines the complexity of the structure of decision trees. The best hyperparameter combination was searched for in terms of the angular resolution. As a results, N\_estimators and Max. depth are set to 300 and 100, respectively. Similar tests were also performed for different hyperparameters. The best values for other hyperparameters are displayed in Tab~\ref{tab:XgbPar}. Other hyperparameters tuned in this study are Subsample, Learning rate, and Gamma. Subsample controls the fraction of total event samples for each boosting procedure, and Learning rate weights a decision tree to be added current model. Lastly, Gamma regulates the evaluation of each decision tree.
+We studied a correlation between byperparameters of the XGB model and the angular resolution. The test scans the evaluated angular resolution with different hyperparameters. Figure~\ref{fig:par_scan} shows the test results with N\_estimators and Max. depth. N\_estimators defines the maximum allowed number of decision trees to be developed, and the Max. depth defines the complexity of the structure of decision trees. The best hyperparameter combination was searched for in terms of the angular resolution. As a results, N\_estimators and Max. depth are set to 300 and 100, respectively. Similar tests were also performed for different hyperparameters. The best values for other hyperparameters are displayed in Tab.~\ref{tab:XgbPar}. Other hyperparameters tuned in this study are Subsample, Learning rate, and Gamma. Subsample controls the fraction of total event samples for each boosting procedure, and Learning rate weights a decision tree to be added current model. Lastly, Gamma regulates the evaluation of each decision tree.
 
 \begin{table}[hbt!]{\small
 \centering
@@ -138,10 +140,9 @@ Gamma & Requirement on minimum loss function & 0 & 0 \\
 \label{tab:XgbPar}
 }\end{table}
 
-
 \begin{figure}[!hbt]
 \centering
-\includegraphics[width=0.58\textwidth]{figures/res_width.jpg}
+\includegraphics[width=0.58\textwidth]{figures/Fig5_width.pdf}
 \caption{ Angular resolutions are deduced in terms of the strip width for 1-GeV photons at $\theta=$~10$^{\circ}$ }
 \label{fig:angle_reco_width}
 \end{figure}
@@ -151,32 +152,32 @@ Angular resolutions were deduced with varying strip widths from 5 mm to 35 mm as
 \begin{figure}[!hbt]
 \centering
 \stackinset{c}{0.cm}{b}{-0.4cm}{(a)}{
-\includegraphics[width=0.48\textwidth]{figures/Fig5_reco_graph.pdf}
+\includegraphics[width=0.48\textwidth]{figures/Fig6_layer_comp.pdf}
 }\stackinset{c}{0.cm}{b}{-0.4cm}{(b)}{
-\includegraphics[width=0.48\textwidth]{figures/Fig5_reco_inc.pdf}
-}
-\caption{ Deduced angular resolutions as functions of (a) photon energy for $\theta=$~10$^{\circ}$ and (b) polar angle for $E_{\gamma}=$~1~GeV. }
-\label{fig:angle_reco_dep_gr}
-\end{figure}
-
-Figure~\ref{fig:angle_reco_dep_gr} (a) shows the angular resolution as a function of the incident photon energy ($E_{\gamma}=$) for $\theta=$~10$^{\circ}$. Angular resolutions are fitted with a function of $p_{0} \oplus p_{1}/\sqrt{E_{\gamma}(GeV)}$, where $p_{0}$ represents an energy-independent contribution and is estimated to be xxx, and $p_{1}$ denotes the energy-dependent parameter, mainly related with the development of the EM shower. $p_{1}$ is estimated to be xxx for $\theta>$~15$^{\circ}$ and xxx$^{\circ}$~$\pm$~xxx$^{\circ}$ for $\theta=$~10$^{\circ}$ in Fig.~\ref{fig:angle_reco_dep_gr} (b). The discrepancy between them is attributed to the followings: polar angle to be always positive and poor angular resolutions for low $E_{\gamma}$ photons. When $\mu$ and $\alpha$ get comparable each other in Eq~\ref{eqn:gg}, the left tail of the distribution would extend to negative area. This largely affects the case $\mu=$~10$^{\circ}$ and not the case $\mu>$~15$^{\circ}$ considering that the angular resolutions for $E_{\gamma}=$~0.1~GeV is estimated to be 4$^{\circ}$. 
-
-\begin{figure}[!hbt]
-\centering
-\stackinset{c}{0.cm}{b}{-0.4cm}{(a)}{
-\includegraphics[width=0.48\textwidth]{figures/res_Nlayer.jpg}
-}\stackinset{c}{0.cm}{b}{-0.4cm}{(b)}{
-\includegraphics[width=0.48\textwidth]{figures/resol_Nlayer.jpg}
+\includegraphics[width=0.48\textwidth]{figures/Fig6_nlayer.pdf}
 }
 \caption{ (a) Reconstructed polar angles ($\theta$) for 1-GeV photons at $\theta=$~10$^{\circ}$. Red histogram represents the polar angle distribution by requiring $E_{\rm{tot}}>$~10~MeV. (b) Angular resolution as a function of radiation length ($X_{0}$).}
 \label{fig:angle_reco_layer}
 \end{figure}
 
-Furthermore, incidence angles are reconstructed with the front layers of $X_{0}$ in which 99\% of incident photons generate EM showers. Figure~\ref{fig:angle_reco_layer} (a) shows reconstructed angles using front 24 layers of the detector, which corresponds to 4.6$X_{0}$ for 1-GeV photons. A fraction of photons failed to be reconstructed due to the lack of active layers. The failed events are represented as a delta function near 0, and such events are removed by requiring the total energy deposit to be larger than 10~MeV. The angular resolution with the front layer is estimated to be XXX while possessing inefficiency estimated to be 5.8\%.
+Furthermore, incidence angles are reconstructed with the front layers of $X_{0}$ in which 99\% of incident photons generate EM showers. Figure~\ref{fig:angle_reco_layer} (a) shows reconstructed angles using front 24 layers of the detector, which corresponds to 4.6$X_{0}$ for 1-GeV photons. A fraction of photons failed to be reconstructed due to the lack of active layers. The failed events are represented as a delta function near 0, and such events are removed by requiring the total energy deposit to be larger than 10~MeV. The angular resolution with the front layer is estimated to be 1.33~$\pm$~0.01$^{\circ}$ while possessing inefficiency estimated to be 5.8\%.
 
 \begin{figure}[!hbt]
 \centering
-\includegraphics[width=0.6\textwidth]{figures/layer-event.jpg}
+\stackinset{c}{0.cm}{b}{-0.4cm}{(a)}{
+\includegraphics[width=0.48\textwidth]{figures/Fig7_Fit_eres.pdf}
+}\stackinset{c}{0.cm}{b}{-0.4cm}{(b)}{
+\includegraphics[width=0.48\textwidth]{figures/Fig7_eres.pdf}
+}
+\caption{ Deduced angular resolutions as functions of (a) photon energy for $\theta=$~10$^{\circ}$ and (b) polar angle for $E_{\gamma}=$~1~GeV. }
+\label{fig:angle_reco_dep_gr}
+\end{figure}
+
+Figure~\ref{fig:angle_reco_dep_gr} (a) shows the angular resolution as a function of the incident photon energy ($E_{\gamma}=$) for $\theta=$~10$^{\circ}$. Angular resolutions are fitted with a function of $p_{0} \oplus p_{1}/\sqrt{E_{\gamma}(GeV)}$, where $p_{0}$ represents an energy-independent contribution and is estimated to be 0.45$^{\circ}$, and $p_{1}$ denotes the energy-dependent parameter, mainly related with the development of the EM shower. $p_{1}$ is estimated to be xxx$^{\circ}$ for $\theta>$~yyy$^{\circ}$ and xxx$^{\circ}$ for $\theta=$~yyy$^{\circ}$ in Fig.~\ref{fig:angle_reco_dep_gr} (b). The discrepancy between them is attributed to the followings: polar angle to be always positive and poor angular resolutions for low $E_{\gamma}$ photons. When $\mu$ and $\alpha$ get comparable each other in Eq~\ref{eqn:gg}, the left tail of the distribution would extend to negative area. This largely affects the case $\mu=$~10$^{\circ}$ and not the case $\mu>$~15$^{\circ}$ considering that the angular resolutions for $E_{\gamma}=$~0.1~GeV is estimated to be 4$^{\circ}$. 
+
+\begin{figure}[!hbt]
+\centering
+\includegraphics[width=0.6\textwidth]{figures/Fig8_nsample.pdf}
 \caption{ The angular resolution for 1-GeV photons at $\theta=$~10$^{\circ}$ as a function of the number of training samples with different strip widths using the first 24 layers or the full layers. }
 \label{fig:multi-parameter}
 \end{figure}
@@ -188,7 +189,7 @@ Figure~\ref{fig:multi-parameter} shows the angular resolution with different num
 
 We report simulation results on the incidece angle reconstruction of EM sampling calorimeters with photons being in the range of 100~MeV to 2~GeV. EM shwers are simulated in the new samplinng calorimeter.using Geant4. We utilize the $\XGB$ model to reconstruct the photon incident angle by correlating all energy deposits in each strip with the incidence angle all events together.
 
-We tune the hyperparameter of the $\XGB$ to reconstruct the incidence angle with the best angular resolution, and study the angular resolution in terms of the detector configuration. We find that 15-mm-wide strips provide the best angular resolution, which can be expressed as 0.2~$\oplus~$1.1$/\sqrt{E_\gamma}$ for different incident angles. We also conclude that using 24 front layers gives the angular resolution which is comparable with the angular resolution we get from the full layer.
+We tune the hyperparameter of the $\XGB$ to reconstruct the incidence angle with the best angular resolution, and study the angular resolution in terms of the detector configuration. We find that 15-mm-wide strips provide the best angular resolution, which can be expressed as 0.45~$\oplus~$1.21$/\sqrt{E_\gamma}$ for different incident angles. We also conclude that using 24 front layers gives the angular resolution which is comparable with the angular resolution we get from the full layer.
 
 We study that the angular resolution is changing with the variation of the training of the $\XGB$ and the detector configuration. As the strip width decreases, more channels of scintillator strips are required, and the training of the $\XGB$ gets affected due to the increased feature size. This is quenched with the larger number of training samples, which qualitatively improves the training of the $\XGB$. On the other hand, the longer strip width provides the worse angular resolution as the position resolution of the EM shower gets worse. We conclude that 15-mm-wide strips provide the favorable angular resolution with 24 front layers and $10^{5}$ training samples.
 
@@ -197,8 +198,8 @@ We study that the angular resolution is changing with the variation of the train
 %\pagebreak
 
 \section*{Acknowledgement}
-This paper was supported by the National Research Foundation of Korea (NRF) grants funded by the Korea government (MIST) (2019R1A2C1084552 and 2020R1A3B2079993).
+This paper was supported by the National Research Foundation of Korea (NRF) grants funded by the Korea government (MIST) (2019R1A2C1084552 and \\ 2020R1A3B2079993).
 
-\bibliography{paper}
+\printbibliography
 
 \end{document}
