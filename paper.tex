@@ -51,7 +51,11 @@
 %\date[]{Received 6 August 2007}
 
 \begin{abstract}
-We report simulation results on the angular resolution of electromagnetic (EM) sampling calorimeters with photons being in the range of 100~MeV to 2~GeV. A simulation model of the EM calorimeter consists of alternating layers of a 1-mm-thick Pb plate and a 5-mm-thick plastic scintillator plate. The scintillator plates are alternatively segmented in horizontal and vertical strips. In this study, we obtained energy deposits in individual strips using Geant4 simulations and reconstructed incident photon angles using a XGBoost model with boosted decision trees. Angular resolutions are studied in terms of the strip width. The 15-mm-wide strips provide the best angular resolution of 1.23~$\pm$~0.01$^{\circ}$. Incident photon directions can be well reconstructed in the front part (4.6$X_{0}$) of the EM calorimeter with the acceptable angular resolution of 1.33~$\pm$~0.01$^{\circ}$. The angular resolution is mildly dependent on the incidence angle, and varies significantly with the incident photon energy. The energy dependence can be expressed as $\sigma_{\theta}=$~0.43~$\oplus p_{1} /\sqrt{E_{\gamma}}$, where $p_{1}$ gradually decreases with the incidence angle.
+We report simulation results on the angular resolution of electromagnetic (EM) sampling calorimeters with photons being in the range of 100~MeV to 10~GeV. A simulation model of the EM calorimeter consists of alternating layers of a 1-mm-thick Pb plate and a 5-mm-thick plastic scintillator plate. The scintillator plates are alternatively segmented in horizontal and vertical strips. In this study, we obtained energy deposits in individual strips using Geant4 simulations and reconstructed incident photon angles using a XGBoost model with boosted decision trees. Angular resolutions are studied in terms of the strip width.
+The 15-mm-wide strips provide acceptable angular resolution of 1.23~$\pm$~0.01$^{\circ}$. Incident photon directions can be well reconstructed in the front part (6.2$X_{0}$) of the EM calorimeter with the acceptable angular resolution of 
+1.33~$\pm$~0.01$^{\circ}$. 
+
+The angular resolution is mildly dependent on the incidence angle, and varies significantly with the incident photon energy. The energy dependence can be expressed as $\sigma_{\theta}=$~0.43~$\oplus p_{1} /\sqrt{E_{\gamma}}$, where $p_{1}$ gradually decreases with the incidence angle.
 
 \end{abstract}
 \begin{keyword}
@@ -157,7 +161,7 @@ Angular resolutions were deduced with varying strip widths from 5 mm to 35 mm as
 \label{fig:angle_reco_layer}
 \end{figure}
 
-Furthermore, incidence angles are reconstructed with the front layers of 6.2$X_{0}$ in which more than 99\% of incident photons generate EM showers. Figure~\ref{fig:angle_reco_layer} (a) shows reconstructed angles using front 32 layers of the detector, which correspond to 6.2$X_{0}$ for 1-GeV photons. A fraction of photons failed to be reconstructed due to the lack of active layers. The failed events are represented as a delta function near 0, and such events are removed by requiring the total energy deposit to be larger than 10~MeV, 1\% of the incident energy. The angular resolution with the front layer is estimated to be 1.30~$\pm$~0.01$^{\circ}$ while possessing inefficiency estimated to be xxx\%.
+Furthermore, incidence angles are reconstructed with the front layers of 6.2$X_{0}$ in which more than 99\% of incident photons generate EM showers. Figure~\ref{fig:angle_reco_layer} (a) shows reconstructed angles using front 32 layers of the detector, which correspond to 6.2$X_{0}$ for 1-GeV photons. A fraction of photons failed to be reconstructed due to the lack of active layers. The failed events are represented as a delta function near 0, and such events are removed by requiring the total energy deposit to be larger than 10~MeV, 1\% of the incident energy. The angular resolution with the front layer is estimated to be 1.30~$\pm$~0.01$^{\circ}$ while possessing inefficiency estimated to be 1.9\%.
 
 \begin{figure}[!hbt]
 \centering
@@ -170,7 +174,7 @@ Furthermore, incidence angles are reconstructed with the front layers of 6.2$X_{
 \label{fig:angle_reco_dep_gr}
 \end{figure}
 
-Figure~\ref{fig:angle_reco_dep_gr} (a) shows the angular resolution as a function of the incident photon energy ($E_{\gamma}$) at $\theta=$~25$^{\circ}$. Angular resolutions are fitted with a function of $p_{0} \oplus p_{1}/\sqrt{E_{\gamma}(GeV)}$, where $p_{0}$ and $p_{1}$ represent an energy-independent and energy-dependent contribution, respectively. $p_{0}$ and $p_{1}$ are constant for $\theta>$~10$^{\circ}$ and estimated to be 0.29$^{\circ}$ and 1.24$^{\circ}$, respectively. For small $\theta$, The values are deviating up to $\pm$0.15$^{\circ}$  as shown in Fig.~\ref{fig:angle_reco_dep_gr} (b).
+Figure~\ref{fig:angle_reco_dep_gr} (a) shows the angular resolution as a function of the incident photon energy ($E_{\gamma}$) at $\theta=$~25$^{\circ}$. Angular resolutions are fitted with a function of $p_{0} \oplus p_{1}/\sqrt{E_{\gamma}(GeV)}$, where $p_{0}$ and $p_{1}$ represent an energy independent and energy dependent contribution, respectively. $p_{0}$ and $p_{1}$ are constant for $\theta>$~10$^{\circ}$ and estimated to be 0.29$^{\circ}$ and 1.24$^{\circ}$, respectively. For small $\theta$, The values are deviating up to $\pm$0.15$^{\circ}$  as shown in Fig.~\ref{fig:angle_reco_dep_gr} (b).
 
 \begin{figure}[!hbt]
 \centering
