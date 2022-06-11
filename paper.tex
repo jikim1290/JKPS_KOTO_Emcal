@@ -182,7 +182,7 @@ Figure~\ref{fig:angle_reco_dep_gr} (a) shows the angular resolution as a functio
 \label{fig:res_edep}
 \end{figure}
 
-Figure~\ref{fig:res_edep} shows estimated $p_{1}$ as a function of the incidence angle. $p_{0}$ and $p_{1}$ are consistent for $\theta>$~10$^{\circ}$ and estimated to be 0.29$^{\circ}$ and 1.24$^{\circ}$, respectively. For small $\theta$, $p_{1}$ is smaller than larger $\theta$ as the angular resolution is significantly dependent on the incidence angle for the low incident energy.
+Figure~\ref{fig:res_edep} shows estimated $p_{1}$ as a function of the incidence angle. $p_{0}$ and $p_{1}$ are consistent for $\theta>$~10$^{\circ}$ and estimated to be 0.29$^{\circ}$ and 1.24$^{\circ}$, respectively. For small $\theta$, $p_{1}$ is smaller than larger $\theta$ from the fact that the angular resolution is largely dependent on the incidence angle for the low incident energy.
 
 \begin{figure}[!hbt]
 \centering
@@ -191,7 +191,7 @@ Figure~\ref{fig:res_edep} shows estimated $p_{1}$ as a function of the incidence
 \label{fig:multi-parameter}
 \end{figure}
 
-Figure~\ref{fig:multi-parameter} shows the angular resolution with different numbers of training samples for different detector configurations. All configurations show a decrease in the angular resolution with increasing training samples, which means that enhanced statistics for the training results in better reconstruction. The angular resolution with 5-mm-wide scintillator strips decreases more rapidly than others. The number of features for the 5-mm-wide strip is much larger than others, and the number of training samples is much required to correlate larger features. Considering limited computing resources, the setup with $10^{5}$ events, 24 layers, and the 15-mm-wide strip was chosen for training the XGB model. The training result differs by only 0.2$^{\circ}$ from the best setup will full layers.
+Figure~\ref{fig:multi-parameter} shows the angular resolution with different numbers of training samples for different detector configurations. All configurations show a decrease in the angular resolution with increasing training samples, which means that enhanced statistics for the training results in better reconstruction. The angular resolution with 5-mm-wide scintillator strips decreases more rapidly than others. The number of features for the 5-mm-wide strip is much larger than others, and the number of training samples is much required to correlate larger features. Considering limited computing resources, the setup with $10^{5}$ events, 32 layers, and the 15-mm-wide strip was chosen for training the XGB model. The training result differs by only 0.$^{\circ}$ from the best setup will full layers.
  
 \section{SUMMARY}
 \label{sec:sum}
