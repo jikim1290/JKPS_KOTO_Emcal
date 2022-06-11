@@ -53,7 +53,7 @@
 \begin{abstract}
 We report simulation results on the angular resolution of electromagnetic (EM) sampling calorimeters with photons being in the range of 100~MeV to 2~GeV. A simulation model of the EM calorimeter consists of alternating layers of a 1-mm-thick Pb plate and a 5-mm-thick plastic scintillator plate. The scintillator plates are alternatively segmented in horizontal and vertical strips. In this study, we obtained energy deposits in individual strips using Geant4 simulations and reconstructed incident photon angles using a XGBoost model with boosted decision trees. Angular resolutions are studied in terms of the strip width.
 The 15-mm-wide strips provide acceptable angular resolution of 1.23~$\pm$~0.01$^{\circ}$. Incident photon directions can be well reconstructed in the front part (6.2$X_{0}$) of the EM calorimeter with the acceptable angular resolution of 
-1.30~$\pm$~0.01$^{\circ}$. The angular resolution varies significantly with the incident photon energy, and weakly dependent on the incidence angle. The energy dependence can be expressed as $\sigma_{\theta}= p_{0} \oplus p_{1} /\sqrt{E_{\gamma}}$. For the small angle ($\theta<$~10 deg), the angular resolution is also dependent on the incidence angle, and the dependence disappears as the incident energy increases. For the $\theta>$~10 deg, $p_{0}$ and $p_{1}$ are estimated to be 0.29$^{\circ}$ and 1.24$^{\circ}$, respectively.
+1.30~$\pm$~0.01$^{\circ}$. The angular resolution varies significantly with the incident photon energy, and weakly dependent on the incidence angle. The energy dependence can be expressed as $\sigma_{\theta}= p_{0} \oplus p_{1} /\sqrt{E_{\gamma}}$. For low energy photons, the angular resolution is dependent on the incidence angle, and the dependence disappears as the incident energy increases. For the $\theta>$~10 deg, $p_{0}$ and $p_{1}$ are estimated to be 0.29$^{\circ}$ and 1.24$^{\circ}$, respectively.
 
 \end{abstract}
 \begin{keyword}
@@ -165,9 +165,9 @@ Furthermore, incidence angles are reconstructed with the front layers of 6.2$X_{
 \begin{figure}[!hbt]
 \centering
 \stackinset{c}{0.cm}{b}{-0.4cm}{(a)}{
-\includegraphics[width=0.48\textwidth]{figures/Fig7_res_ene.pdf}
+\includegraphics[width=0.44\textwidth]{figures/Fig7_res_ene.pdf}
 }\stackinset{c}{0.cm}{b}{-0.4cm}{(b)}{
-\includegraphics[width=0.48\textwidth]{figures/Fig7_Fit_eres.pdf}
+\includegraphics[width=0.5\textwidth]{figures/Fig7_Fit_eres.pdf}
 }
 \caption{ Angular resolutions as functions of the incidence angle for different incident energies (a) and the incident energy for $\theta=$~25$^{\circ}$, which is fitted with $p_{0} \oplus p_{1}/\sqrt{E_{\gamma}(GeV)}$ (b) }
 \label{fig:angle_reco_dep_gr}
