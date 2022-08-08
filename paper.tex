@@ -76,7 +76,7 @@ This study describes a machine-learning approach based on XGBoost (XGB), which i
 
 \begin{figure}[!hbt]
 \centering
-\includegraphics[width=0.6\textwidth]{Fig1_detector_schematic.jpeg}
+\includegraphics[width=0.6\textwidth]{figures/Fig1_detector_schematic.jpeg}
 \caption{ Schematic of the sampling calorimeter model consisting of 105 alternating layers of a Pb and segmented scintillator plate in 35 strips. Each scintillator plate is oriented alternatively in horizontal and vertical directions. See text for details. }
 \label{fig:det_conf}
 \end{figure}
@@ -86,8 +86,8 @@ The sampling calorimeter was designed as a block consisting of alternating layer
 
 \begin{figure}[!hbt]
 \centering
-\includegraphics[width=0.48\textwidth]{Fig2_EMShower_XZ.pdf}
-\includegraphics[width=0.48\textwidth]{Fig2_EMShower_YZ.pdf}
+\includegraphics[width=0.48\textwidth]{figures/Fig2_EMShower_XZ.pdf}
+\includegraphics[width=0.48\textwidth]{figures/Fig2_EMShower_YZ.pdf}
 \caption{ Event display of simulated energy deposit patterns for an 1-GeV photon entering the calorimeter ($\theta=$~0) in (a) $xz$- and (b) $yz$-planes.}
 \label{fig:Evt_Dis}
 \end{figure}
@@ -103,7 +103,7 @@ The incident angles of the photons are reconstructed using XGB~\cite{xgboost:201
 
 \begin{figure}[!hbt]
 \centering
-\includegraphics[width=0.7\textwidth]{Fig3_fit_GG.pdf}
+\includegraphics[width=0.7\textwidth]{figures/Fig3_fit_GG.pdf}
 \caption{ The relative incident angle for 1-GeV photons generated at $\theta=$~10$^{\circ}$. The distribution is fitted with the Gaussian and generalized Gaussian functions. The generalized Gaussian function gives a better result.}
 \label{fig:angle_10degree}
 \end{figure}
@@ -117,12 +117,12 @@ where $\mu$ is the mean value. The parameters $\alpha$ and $\beta$ determine the
 
 \begin{figure}[!hbt]
 \centering
-\includegraphics[width=0.69\textwidth]{Fig4_Opt.pdf}
+\includegraphics[width=0.69\textwidth]{figures/Fig4_Opt.pdf}
 \caption{Angular resolutions are displayed in terms of combination of N\_estimators and Max. depth. The best angular resolution is obtained with N\_estimators~=~300 and Max. depth~=~100. }
 \label{fig:par_scan}
 \end{figure}
 
-Because the performance of the angle reconstruction of the XGB depends on the hyperparameters, we scanned the evaluated angular resolution by changing the hyperparameters. As there were correlations among the hyperparameters, the scanning process was performed in a five-dimensional space for all possible combinations. As an example, Figure 4 shows the test results for N\_estimators and Max. depth. N\_estimators defines the maximum allowed number of decision trees to be developed, and Max. depth defines the complexity of the decision-tree structure. We explored a hyperparameter combination that generated the best angular resolution. Consequently, the N\_estimators and Max. depth were set to 300 and 100, respectively. Similar scans were also performed for different hyperparameters, subsample, learning rates, and gamma values. Subsample controls the fraction of total event samples for each boosting procedure, the learning rate weights a decision tree to be added onto the current model, and the gamma value regulates the evaluation of each decision tree. Table~\ref{tab:XgbPar} lists the optimized set of hyperparameters that are used in further studies. During the optimization process, the fraction of the tail that is not well described by the GG function is approximately 2\%.
+Because the performance of the angle reconstruction of the XGB depends on the hyperparameters, we scanned the evaluated angular resolution by changing the hyperparameters. As there were correlations among the hyperparameters, the scanning process was performed in a five-dimensional space for all possible combinations. As an example, Figure 4 shows the test results for N\_estimators and Max. depth. N\_estimators defines the maximum allowed number of decision trees to be developed, and Max. depth defines the complexity of the decision-tree structure. We explored a hyperparameter combination that generated the best angular resolution. Consequently, the N\_estimators and Max. depth were set to 300 and 100, respectively. Similar scans were also performed for different hyperparameters, subsample, learning rates, and gamma. Subsample controls the fraction of total event samples for each boosting procedure, the learning rate weights a decision tree to be added onto the current model, and the gamma regulates the evaluation of each decision tree. Table~\ref{tab:XgbPar} lists the optimized set of hyperparameters that are used in further studies. During the optimization process, the fraction of the tail that is not well described by the GG function is approximately 2\%.
 
 \begin{table}[hbt!]{\small
 \centering
@@ -142,7 +142,7 @@ Gamma & Requirement on minimum loss function & 0 & 0 \\
 
 \begin{figure}[!hbt]
 \centering
-\includegraphics[width=0.58\textwidth]{Fig5_width.pdf}
+\includegraphics[width=0.58\textwidth]{figures/Fig5_width.pdf}
 \caption{ Angular resolutions are deduced in terms of the strip width for 1-GeV photons at $\theta=$~10$^{\circ}$ }
 \label{fig:angle_reco_width}
 \end{figure}
@@ -152,9 +152,9 @@ Angular resolutions were deduced by varying the strip width from 5 to 35 mm, as 
 \begin{figure}[!hbt]
 \centering
 \stackinset{c}{0.cm}{b}{-0.4cm}{(a)}{
-\includegraphics[width=0.48\textwidth]{Fig6_layer_comp.pdf}
+\includegraphics[width=0.48\textwidth]{figures/Fig6_layer_comp.pdf}
 }\stackinset{c}{0.cm}{b}{-0.4cm}{(b)}{ 
-\includegraphics[width=0.48\textwidth]{Fig6_nlayer.pdf}
+\includegraphics[width=0.48\textwidth]{figures/Fig6_nlayer.pdf}
 }
 \caption{ (a) Reconstructed polar angles ($\theta$) for 1-GeV photons at $\theta=$~10$^{\circ}$. The red histogram represents the polar angle distribution for $E_{\rm{tot}}>$~10~MeV. (b) Angular resolution as a function of the radiation length ($X_{0}$).}
 \label{fig:angle_reco_layer}
@@ -165,9 +165,9 @@ Focusing only on the angle reconstruction, we designed the detector with the sma
 \begin{figure}[!hbt]
 \centering
 \stackinset{c}{0.cm}{b}{-0.4cm}{(a)}{
-\includegraphics[width=0.44\textwidth]{Fig7_res_ene.pdf}
+\includegraphics[width=0.44\textwidth]{figures/Fig7_res_ene.pdf}
 }\stackinset{c}{0.cm}{b}{-0.4cm}{(b)}{
-\includegraphics[width=0.44\textwidth]{Fig7_Fit_eres_1.pdf}
+\includegraphics[width=0.44\textwidth]{figures/Fig7_Fit_eres_1.pdf}
 }
 \caption{ (a) Angular resolution as a function of the incident angle for different incident energies. (b) Angular resolution as a function of the incident energy for $\theta=$~25$^{\circ}$; it is fitted to the function $p_{0} \oplus p_{1}/\sqrt{E_{\gamma}(\mathrm{GeV})}$ }
 \label{fig:angle_reco_dep_gr}
@@ -177,17 +177,17 @@ Figure~\ref{fig:angle_reco_dep_gr} (a) shows the angular resolution as a functio
 
 \begin{figure}[!hbt]
 \centering
-\includegraphics[width=0.44\textwidth]{Fig7_p0.pdf}
-\includegraphics[width=0.44\textwidth]{Fig7_p1.pdf}
-\caption{ $p_{0}$ and $p_{1}$ values as functions of the incident angle }
+\includegraphics[width=0.44\textwidth]{figures/Fig7_p0.pdf}
+\includegraphics[width=0.44\textwidth]{figures/Fig7_p1.pdf}
+\caption{ $p_{0}$ and $p_{1}$ as functions of the incident angle }
 \label{fig:res_edep}
 \end{figure}
 
-Figure~\ref{fig:res_edep} shows the estimated $p_{0}$ and $p_{1}$ values as functions of the incident angle. The average values of $p_{0}$ and $p_{1}$ are estimated to be 0.24$^{\circ}$ and 1.24$^{\circ}$, respectively, for $\theta>$~10$^{\circ}$. For a small $\theta$, $p_{1}$ is smaller than that for a larger $\theta$ because the angular resolution is largely dependent on the incident angle for low incident energies, whereas the opposite trend can be observed for $p_{0}$.
+Figure~\ref{fig:res_edep} shows the estimated $p_{0}$ and $p_{1}$ as functions of the incident angle. The average values of $p_{0}$ and $p_{1}$ are estimated to be 0.24$^{\circ}$ and 1.24$^{\circ}$, respectively, for $\theta>$~10$^{\circ}$. For a small $\theta$, $p_{1}$ is smaller than that for a larger $\theta$ because the angular resolution is largely dependent on the incident angle for low incident energies, whereas the opposite trend can be observed for $p_{0}$.
 
 \begin{figure}[!hbt]
 \centering
-\includegraphics[width=0.6\textwidth]{Fig8_nsample.pdf}
+\includegraphics[width=0.6\textwidth]{figures/Fig8_nsample.pdf}
 \caption{ The angular resolution for 1-GeV photons at $\theta=$~10$^{\circ}$ as a function of the number of training samples with different strip widths obtained using the first 32 layers or the full layers. }
 \label{fig:multi-parameter}
 \end{figure}
