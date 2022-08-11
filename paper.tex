@@ -30,7 +30,7 @@
 \begin{frontmatter}
 
 \setcounter{page}{0}
-\title{Simulation of Angular Resolution of a New Electromagnetic Sampling Calorimeter}
+\title{Simulation of angular resolution of a new electromagnetic sampling calorimeter}
 
 \author[jbnu]{Junlee~Kim}
 \ead{junlee.kim@cern.ch}
@@ -69,20 +69,20 @@ Electromagnetic (EM) calorimeter plays an important role in the experimental stu
 
 In addition to the alternating layer structure, the segmented structure of the active medium facilitates the measurement of the lateral distributions of the EM shower along the incident photon direction. Energy deposits in the active medium segmented in both the longitudinal and lateral directions allow for the deduction of the incident direction of the incoming photon. A limitation in the angular resolution, especially for low-energy photons, results from the stochastic behavior of EM shower development~\cite{trk:ref}. We performed a simulation study to deduce the incident angle of the photons, which can be a starting point for designing a detector configuration to provide precise angle measurements for photons.
 
-This study describes a machine-learning approach based on XGBoost (XGB), which is an optimized distributed gradient-boosting library~\cite{xgboost:2016}. With machine-learning algorithms under the gradient boosting framework, we can deduce the direction of the incident photons entering a sampling calorimeter with alternating layers of Pb plate and plastic scintillator strips in the horizontal and vertical directions.
+This study describes a machine-learning approach based on XGBoost (XGB), which is an optimized distributed gradient-boosting library~\cite{xgboost:2016}. With machine-learning algorithms under the gradient-boosting framework, we can deduce the direction of the incident photons entering a sampling calorimeter with alternating layers of Pb plate and plastic scintillator strips in the horizontal and vertical directions.
 
-\section{Electromagnetic Shower Simulation}
+\section{Electromagnetic shower simulation}
 \label{sec:ems}
 
 \begin{figure}[!hbt]
 \centering
 \includegraphics[width=0.6\textwidth]{figures/Fig1_detector_schematic.jpeg}
-\caption{ Schematic of the sampling calorimeter model consisting of 105 alternating layers of a Pb and segmented scintillator plate in 35 strips. Each scintillator plate is oriented alternatively in horizontal and vertical directions. See text for details. }
+\caption{ Schematic of the sampling calorimeter model consisting of 105 alternating layers of a Pb and segmented scintillator plate in 35 strips. Each scintillator plate is oriented alternately in horizontal and vertical directions. See text for details. }
 \label{fig:det_conf}
 \end{figure}
 
 
-The sampling calorimeter was designed as a block consisting of alternating layers of an 1-mm-thick Pb absorber and a 5-mm-thick polyvinyltoluene-based plastic scintillator. The plastic scintillator is segmented into 15-mm-wide strips, which are alternatively oriented in the vertical and horizontal directions, as shown in Figure~\ref{fig:det_conf}. It has a cross-section of size 525~$\times$~525~mm$^{2}$ and accommodates 105 alternating layers of 630~mm length, which corresponds to 20 radiation lengths (20$X_{0}$) that are sufficiently long to absorb full photon energy in the range of 0.1 to 2~GeV.
+The sampling calorimeter was designed as a block consisting of alternating layers of an 1-mm-thick Pb absorber and a 5-mm-thick polyvinyltoluene-based plastic scintillator. The plastic scintillator is segmented into 15-mm-wide strips, which are alternately oriented in the vertical and horizontal directions, as shown in Figure~\ref{fig:det_conf}. It has a cross-section of size 525~$\times$~525~mm$^{2}$ and accommodates 105 alternating layers of 630~mm length, which corresponds to 20 radiation lengths (20$X_{0}$) that are sufficiently long to absorb full photon energy in the range of 0.1 to 2~GeV.
 
 \begin{figure}[!hbt]
 \centering
@@ -96,7 +96,7 @@ The sampling calorimeter was designed as a block consisting of alternating layer
 
 The detector response to the incident photons was simulated using Geant4 (ver. 4.10.06) with standard EM sub-packages~\cite{GEANT4}. The direction normal to the detector surface defines the $z$-axis. The photon direction was defined by the polar angle ($\theta$) with respect to the $z$-axis. Figure~\ref{fig:Evt_Dis} illustrates the simulated energy deposit patterns in each strip for an 1-GeV photon at normal incidence in the $xz$- and $yz$-planes. Each segmented region shown in Figure~\ref{fig:Evt_Dis} represents a channel.
 
-\section{Reconstruction of Incident Angles}
+\section{Reconstruction of incident angles}
 \label{sec:res}
 
 The incident angles of the photons are reconstructed using XGB~\cite{xgboost:2016}, which maps a feature dataset of the energy deposits in each scintillator strip onto a target variable, the incident angle of a photon. Training data were carefully prepared using the Geant4 simulation such that the input datasets were representative of the detector response of the real sampling calorimeters. To minimize the bias in the training process related to the dataset, the incident angles were uniformly generated at the detector surface in the angular range of 0~$<\theta<$~50$^{\circ}$ and 0~$<\varphi<$~360$^{\circ}$, where $\varphi$ denotes the azimuthal angle. The number of training samples was $10^{5}$ considering the limited computing resources. To test the reconstruction of the incident angles, we generated photons at a fixed incident angle $\theta$ with a known incident energy.
@@ -147,7 +147,7 @@ Gamma & Requirement on minimum loss function & 0 & 0 \\
 \label{fig:angle_reco_width}
 \end{figure}
 
-Angular resolutions were deduced by varying the strip width from 5 to 35 mm, as shown in Figure~\ref{fig:angle_reco_width}. The narrower the strip width, the larger is the size of the features. Consequently, the angle-reconstruction performance declines. However, the wider strips hardly provide detailed information on the EM shower. The 15-mm-wide strips yield a good angular resolution of 1.23~$\pm$~0.01$^{\circ}$.
+Angular resolutions were deduced by varying the strip width from 5 to 35 mm, as shown in Figure~\ref{fig:angle_reco_width}. The narrower the strip width, the larger is the size of the features. Consequently, the angle-reconstruction performance is better with 10-mm-wide strips than 5-mm-wide strips. However, the wider strips hardly provide detailed information on the EM shower. The 15-mm-wide strips yield a good angular resolution of 1.23~$\pm$~0.01$^{\circ}$.
 
 \begin{figure}[!hbt]
 \centering
@@ -160,7 +160,7 @@ Angular resolutions were deduced by varying the strip width from 5 to 35 mm, as 
 \label{fig:angle_reco_layer}
 \end{figure}
 
-Focusing only on the angle reconstruction, we designed the detector with the smallest number of layers. Figure~\ref{fig:angle_reco_layer} (a) shows the angles reconstructed using the front 32 layers of the detector, which correspond to 6.2$X_{0}$, for 1-GeV photons. A fraction of the photons fail to be reconstructed because of insufficient information gathering caused by deeply penetrating photons without shower generation. The failed events are represented as a delta function near 0, and such events are removed by fixing the total energy deposit at a value higher than 10~MeV, which is 1\% of the incident energy. The angular resolution of the front layer is estimated to be 1.30~$\pm$~0.01$^{\circ}$ when 1.9\% of the photons fail to be reconstructed.
+Focusing only on the angle reconstruction, we designed the detector with the smallest number of layers. Figure~\ref{fig:angle_reco_layer} (a) shows the angles reconstructed using the front 32 layers of the detector, which correspond to 6.2$X_{0}$, for 1-GeV photons. A fraction of the photons fail to be reconstructed because of insufficient information gathering caused by deeply penetrating photons without shower generation. The failed events are represented as a delta function near 0, and such events are removed by requiring the total energy deposit to be higher than 10~MeV, which is 1\% of the incident energy. The angular resolution of the front layer is estimated to be 1.30~$\pm$~0.01$^{\circ}$ when 1.9\% of the photons fail to be reconstructed.
 
 \begin{figure}[!hbt]
 \centering
@@ -179,11 +179,11 @@ Figure~\ref{fig:angle_reco_dep_gr} (a) shows the angular resolution as a functio
 \centering
 \includegraphics[width=0.44\textwidth]{figures/Fig7_p0.pdf}
 \includegraphics[width=0.44\textwidth]{figures/Fig7_p1.pdf}
-\caption{ $p_{0}$ and $p_{1}$ as functions of the incident angle }
+\caption{ $p_{0}$ and $p_{1}$ as a function of the incident angle }
 \label{fig:res_edep}
 \end{figure}
 
-Figure~\ref{fig:res_edep} shows the estimated $p_{0}$ and $p_{1}$ as functions of the incident angle. The average values of $p_{0}$ and $p_{1}$ are estimated to be 0.24$^{\circ}$ and 1.24$^{\circ}$, respectively, for $\theta>$~10$^{\circ}$. For a small $\theta$, $p_{1}$ is smaller than that for a larger $\theta$ because the angular resolution is largely dependent on the incident angle for low incident energies, whereas the opposite trend can be observed for $p_{0}$.
+Figure~\ref{fig:res_edep} shows the estimated $p_{0}$ and $p_{1}$ as a function of the incident angle. The average values of $p_{0}$ and $p_{1}$ are estimated to be 0.24$^{\circ}$ and 1.24$^{\circ}$, respectively, for $\theta>$~10$^{\circ}$. For a small $\theta$, $p_{1}$ is smaller than that for a larger $\theta$ because the angular resolution is largely dependent on the incident angle for low incident energies, whereas the opposite trend can be observed for $p_{0}$.
 
 \begin{figure}[!hbt]
 \centering
@@ -201,7 +201,7 @@ We report the simulation results of the incident angle reconstruction of EM samp
 
 In terms of detector configuration, strips with narrower widths provide better angular resolution using a finely measured EM shower with the assumption that the training is fully conducted. However, the configuration with a smaller strip width causes a larger feature size, which negatively affects the training depending on the quantity of training data. The angular resolution may be optimized by considering the two competing effects of the strip width and quantity of training data. We dedicated the front layers of the detector to reconstructing the incident angle. We obtain an angular resolution of 1.30~$\pm$~0.01$^{\circ}$ for the configuration of 32 layers (6.2$X_{0}$) of 15-mm-wide strips, which is a reduction of 0.1$^{\circ}$ compared to that of the configuration with full layers (20$X_{0}$) in the case of $10^{5}$ training samples. 
 
-The angular resolution depends on the incident energy of the photon, and the dependence is expressed as $p_{0} \oplus p_{1}/\sqrt{E_{\gamma}}$. Except for small incident angles ($\theta<$~15~deg), the two parameters do not significantly change up to 
+The angular resolution depends on the incident energy of the photon, and the dependence is expressed as $p_{0} \oplus p_{1}/\sqrt{E_{\gamma}}$. Except for small incident angles ($\theta<$~$^{\circ}$~deg), the two parameters do not significantly change up to 
 $40^{\circ}$, and the dependence is estimated to be 0.24 $\oplus$ 1.24$^{\circ}/\sqrt{E_{\gamma}}$. 
 
 \label{sec:con}
