@@ -1,8 +1,6 @@
-\documentclass[preprint,12pt,times,a4paper]{elsarticle}
+\documentclass[12pt,times,draftclsnofoot,a4paper]{elsarticle}
 
 \usepackage{graphicx}
-\usepackage{amssymb}
-\usepackage{amsmath}
 \usepackage{lineno}
 \usepackage{xspace}
 \usepackage{lipsum}
@@ -10,20 +8,14 @@
 \usepackage{stackengine}
 \usepackage{titlesec}
 \usepackage{xcolor}
+\usepackage{comment}
 \usepackage[bitstream-charter]{mathdesign}
 \usepackage[T1]{fontenc}
 \usepackage{geometry, float}
-%\usepackage{biblatex}
-%\addbibresource{paper.bib}
-
-\geometry{a4paper}
-
 \usepackage[normalem]{ulem}
 \usepackage{stackengine}
 
 \journal{Nuclear Instruments and Methods in Physics Research A}
-
-\newcommand{\XGB}{XGBoost}
 
 \begin{document}
 
@@ -51,8 +43,7 @@
 %\date[]{Received 6 August 2007}
 
 \begin{abstract}
-We report the simulation results for angular resolution of an electromagnetic (EM) sampling calorimeter with photons in the range of 100~MeV to 2~GeV. The simulation model of the EM calorimeter consists of alternating layers of an 1-mm-thick Pb plate and a 5-mm-thick plastic scintillator plate. The scintillator plates are alternately segmented into horizontal and vertical strips. In this study, we obtained energy deposits in individual strips using Geant4 simulations and reconstructed the incident photon angles using XGBoost with gradient-boosted decision trees. The performance of the angle reconstruction depends on both the detector configuration and accuracy of machine learning. The angular resolution so obtained can be expressed as $0.24 \oplus 1.24/\sqrt{E_{\gamma}}$, where $E_{\gamma}$ is the incident photon energy in GeV. This energy dependence is consistent for different incident angles 
-in the range of 15$^{\circ}$ to 40$^{\circ}$.
+We report on the simulation results for angular resolution of an electromagnetic (EM) sampling calorimeter with photons in the range of 100~MeV to 2~GeV. The simulation model of the EM calorimeter consists of alternating layers of an 1-mm-thick lead plate and a 5-mm-thick plastic scintillator plate. The scintillator plates are alternately segmented into horizontal and vertical strips. In this study, we obtained energy deposits in individual strips using Geant4 simulations and reconstructed the incident photon angles using XGBoost with gradient-boosted decision trees. The performance of the angle reconstruction depends on both the detector configuration and accuracy of machine learning. The angular resolution so obtained can be expressed as $0.24 \oplus 1.24/\sqrt{E_{\gamma}}$, where $E_{\gamma}$ is the incident photon energy in GeV, for strips of 15 mm and 32 layers. This energy dependence is consistent for different incident angles in the range of 10$^{\circ}$ to 40$^{\circ}$.
 
 \end{abstract}
 \begin{keyword}
@@ -62,53 +53,68 @@ Electromagnetic Calorimeter \sep Geant4 \sep XGBoost
 
 \end{frontmatter}
 
+\linenumbers
 
 \section{Motivation}
 \label{sec:mot}
-Electromagnetic (EM) calorimeter plays an important role in the experimental studies of nuclear and particle physics~\cite{KOTO:MB, CMS:EMCAL, BELLE:EMCAL}. Recently, sampling calorimeters consisting of alternating layers of an absorber that generates EM showers and an active medium that provides signals have become popular, especially in large-scale high-energy experiments. In sampling calorimeters, the energy deposited in the active medium fluctuates because the active layers are interleaved with the absorber layers. This so-called sampling fluctuation dominates the energy resolution. This sampling fluctuation can be improved by optimizing the thickness ratio of the absorber to the active medium. A 3-m-long cylindrical calorimeter constructed of alternating layers of Pb and plastic scintillator plates is an example of a sampling calorimeter~\cite{Murayama:2020mcp}.
 
-In addition to the alternating layer structure, the segmented structure of the active medium facilitates the measurement of the lateral distributions of the EM shower along the incident photon direction. Energy deposits in the active medium segmented in both the longitudinal and lateral directions allow for the deduction of the incident direction of the incoming photon. A limitation in the angular resolution, especially for low-energy photons, results from the stochastic behavior of EM shower development~\cite{trk:ref}. We performed a simulation study to deduce the incident angle of the photons, which can be a starting point for designing a detector configuration to provide precise angle measurements for photons.
+Calorimeter plays an important role in the experimental studies of nuclear and particle physics~\cite{unitext}. An ideal calorimeter fully absorbs the energy of the entering particle and converts the energy into measurable quantities. The sampling calorimeter consists of different materials, one is the absorber generating a shower of secondary particles, and the other is an active medium that generates signals from the energy deposits of the secondaries. Because the energy deposit in the active medium fluctuates associated with the dense absorber, the sampling calorimeter has an inevitable drawback in energy resolution, especially in the measurement of gamma. This effect can be controlled by adjusting the material budget between the absorber and active medium and their configuration. Also, it becomes less critical as gamma energy becomes higher.
 
-This study describes a machine-learning approach based on XGBoost (XGB), which is an optimized distributed gradient-boosting library~\cite{xgboost:2016}. With machine-learning algorithms under the gradient-boosting framework, we can deduce the direction of the incident photons entering a sampling calorimeter with alternating layers of Pb plate and plastic scintillator strips in the horizontal and vertical directions.
+In general, the sampling calorimeter enables cost-effective fabrication of large-scale detectors and design of flexible geometric configuration. This detector has been developed in various ways by selecting a material of absorber among many caodidates such as brass~\cite{CMS:mat}, lead~\cite{CDF:mat}, tungsten~\cite{DELPHI:mat}, uranium~\cite{UGAS:mat}, and also of active medium such as scintillators~\cite{CMS:mat,CDF:mat}, gas~\cite{UGAS:mat}, solid-state detector~\cite{DELPHI:mat}, and liquid gas~\cite{LiqAR:mat}. Also, there are many topologies to pile up the materials and read out their signals, such as sandwich~\cite{KOTO:MB}, shashlik~\cite{shashlik:con}, spaghetti~\cite{KLOE:con}, and accordian~\cite{LiqAR:mat}.
+
+The sampling calorietmer has been used to measure the direction of arriving photons in a space-based detector to identify astrophysical sources for gamma-ray astrophysics. The Fermi Large Area Telescope (LAT) has a tracker consisting of 18 $x$-$y$ pairs of silicon strip detectors with 16 interleaved tungsten foils. Tracking with the silicon detectors on the electron-positron pairs produced at the foils provides an angular resolution of 0.6 degrees for 1-GeV photons and better than 0.16 degrees for energy higher than 10~GeV~\cite{FERMI:LAT}. The LAT has two additional components: a scintillating plastic for the charged-particle detection and a homogeneous CsI crystals for energy measurement. This triple detector configuration is also used in different missions. An energy spectrum measurement of cosmic-ray electrons (CALET)~\cite{CALET} utilizes scintillating fibers and PWO crystals instead of the silicon strips and the CsI crystals, respectively. A dark matter particle explorer mission (DMPE)~\cite{DMPE} selects BGO crystals for energy measurement. The angular resolution of the detector is obtained as 1--2 degrees for 1-GeV photons.
+
+In the accelerator-based experiments, the direction of photons can be precisely obtained by connecting the interaction position obtained from charged particle tracks to their incident position measured at the calorimeter. However, it is not possible to reconstruct the interaction (decay) position when we observe $K_{L} \rightarrow \pi^{0}\nu\bar{\nu}$ decay, in which no charged particle exists. The decay is explained with a CP-violating Flavor Changing Neutral Current process and has significant potential to provide clues to new physics beyond the Standard Model (SM). Its branching fraction is calculated to be extremely small as 3~$\times$~10$^{-11}$ in the SM~\cite{KOTOtheory}, which implies that the effect of new physics on the decay could overwhelm that of the SM. Any observed deviation from the SM prediction will indicate new physics without hesitation, thanks to the small uncertainty in the theoretical calculation.
+
+The $K_{L} \rightarrow \pi^{0}\nu\bar{\nu}$ decay is identified as a final state existing only a single $\pi^{0}$ reconstructed from detected two photons. A hermetic detector system enclosing the decay region should be prepared to confirm only two photons in the final state. There had been an experimental proposal to detect the $K_{L} \rightarrow \pi^{0}\nu\bar{\nu}$ decay with the reconstruction of a single $\pi^{0}$ using directional information of two photons~\cite{KOPIO}. A Preradiator (PR) is placed in front of the calorimeter to measure the photon's incident angle. The PR consists of a close-packed multi-layer sandwich of 8-mm-thick scintillating plastics alternating with the single-plane and this-gap drift chambers with cathode strips. For good energy resolution and high detection efficiency against a few hundred MeV photons, the scintillating plastic is used for electron-positron conversion. This idea had been confirmed by a beam test using tagged photon beams and achieved its angular resolution of 25~mrad for 250~MeV~\cite{KOPIOcdr}. Unfortunately, the proposal was not accepted, and the detector development could not continue.
+
+On the other hand, the KOTO experiment at J-PARC~\cite{KOTOexp} takes another approach to identify $K_{L} \rightarrow \pi^{0}\nu\bar{\nu}$ decay with a well-collimated small-size neutral beam, which constrains the transverse decay position to be at the beam axis. With this assumption, the distance between the decay position and the calorimeter is calculated from the positions and energies of the two photons, and the transverse momentum of $\pi^{0}$ is obtained. The two variables, the longitudinal decay position and the transverse momentum, are used to define a signal region of the decay. The KOTO experiment started data taking in 2013 and has achieved its experimental sensitivity as 7.2~$\times$~10$^{-10}$~\cite{KOTOexp}. The data taking will continue for  several more years, and the sensitivity will reach 10$^{-11}$. It is still not enough to determine the branching fraction if it is close to the SM expectations. 
+
+A successive experiment of the KOTO is under preparation to observe more than 35 $K_{L} \rightarrow \pi^{0}\nu\bar{\nu}$ decays with a higher-intensity beam and a larger-scale detector system~\cite{KOTO2}. In this higher-sensitive measurement, the halo kaon, which is scattered by beam line materials and decays at off-beam axis, will become a considerable background source when the kaon decays via $K_{L} \rightarrow 2\gamma$. In addition, the neutrons away from the beam axis produce a $\pi^{0}$ or $\eta$ by interacting with detector materials. Two photons from those events are also one of main backgrounds. We can remove them by comparing the incident angle expected from the reconstructed vertex and the actual measurement using a new sampling calorimeter in this paper.
+
+In this respect, we report on results of Monte Carlo studies on directional measurement analyzing energy-weighted shower shapes generated in a toy sampling calorimeter, which consists of segmented alternating lead and scintillating plastic layers. There is a limitation in the angular resolution from the analysis of shower shape produced in a sampling calorimeter due to the stochastic feature of its generation. A deduction of the incident angle of the EM shower using a lead scintillating fiber sandwiched sampling calorimeter is studied~\cite{PbScint}, and the obtained angular resolution is 0.8 degrees for 100-GeV electrons and expected to be larger than 8 degrees for 1-GeV electrons. We take a machine-learning approach to get better angular resolution from the analysis. Recently, machine-learning analysis has become a critical tool for better measurement of particle identification~\cite{mlp}, timing~\cite{mlt}, and energy~\cite{mle}. We use the XGBoost (XGB), which is an optimized distributed gradient-boosting library~\cite{xgboost:2016}.
+
+A description on the detector configuration and Monte Carlo generation will be given in Section~\ref{sec:ems}. In the Section~\ref{sec:res}, results of the machine learning studies on the generated data will be presented, and a summary will follow in the Section~\ref{sec:sum}. 
 
 \section{Electromagnetic shower simulation}
 \label{sec:ems}
 
 \begin{figure}[!hbt]
 \centering
-\includegraphics[width=0.6\textwidth]{figures/Fig1_detector_schematic.jpeg}
-\caption{ Schematic of the sampling calorimeter model consisting of 105 alternating layers of a Pb and segmented scintillator plate in 35 strips. Each scintillator plate is oriented alternately in horizontal and vertical directions. See text for details. }
+\includegraphics[width=0.6\textwidth]{Fig1_detector_schematic.jpeg}
+\caption{ Schematic of the sampling calorimeter model consisting of 105 alternating layers of lead and scintillator plates. Each plate is segmented in 35 strips, oriented alternately in horizontal and vertical directions. See text for details. }
 \label{fig:det_conf}
 \end{figure}
 
-
-The sampling calorimeter was designed as a block consisting of alternating layers of an 1-mm-thick Pb absorber and a 5-mm-thick polyvinyltoluene-based plastic scintillator. The plastic scintillator is segmented into 15-mm-wide strips, which are alternately oriented in the vertical and horizontal directions, as shown in Figure~\ref{fig:det_conf}. It has a cross-section of size 525~$\times$~525~mm$^{2}$ and accommodates 105 alternating layers of 630~mm length, which corresponds to 20 radiation lengths (20$X_{0}$) that are sufficiently long to absorb full photon energy in the range of 0.1 to 2~GeV.
+The toy sampling calorimeter is designed as a block consisting of alternating layers of an 1-mm-thick Pb absorber and a 5-mm-thick polyvinyltoluene-based plastic scintillator. The plastic scintillator is segmented into 15-mm-wide strips, which are alternately oriented in the vertical and horizontal directions, as shown in Figure~\ref{fig:det_conf}. It has a cross-section size of 525~$\times$~525~mm$^{2}$ and accommodates 105 alternating layers of 630~mm and 20 radiation lengths (20$X_{0}$) to contain photons showers for energies in the range of 0.1 to 2~GeV.
 
 \begin{figure}[!hbt]
 \centering
-\includegraphics[width=0.48\textwidth]{figures/Fig2_EMShower_XZ.pdf}
-\includegraphics[width=0.48\textwidth]{figures/Fig2_EMShower_YZ.pdf}
+\includegraphics[width=0.48\textwidth]{Fig2_EMShower_XZ.pdf}
+\includegraphics[width=0.48\textwidth]{Fig2_EMShower_YZ.pdf}
 \caption{ Event display of simulated energy deposit patterns for an 1-GeV photon entering the calorimeter ($\theta=$~0) in (a) $xz$- and (b) $yz$-planes.}
 \label{fig:Evt_Dis}
 \end{figure}
 
+The detector response to the incident photons is simulated using Geant4 (ver. 4.10.06) with standard EM sub-packages~\cite{GEANT4}. The direction normal to the front surface defines the $z$-axis. The photon direction is defined by the polar angle ($\theta$) with respect to the $z$-axis. Figure~\ref{fig:Evt_Dis} illustrates the simulated energy deposit patterns in each strip for an 1-GeV photon at normal incidence in the $xz$- and $yz$-planes. Each segmented region shown in Figure~\ref{fig:Evt_Dis} represents a channel. 
 
-
-The detector response to the incident photons was simulated using Geant4 (ver. 4.10.06) with standard EM sub-packages~\cite{GEANT4}. The direction normal to the detector surface defines the $z$-axis. The photon direction was defined by the polar angle ($\theta$) with respect to the $z$-axis. Figure~\ref{fig:Evt_Dis} illustrates the simulated energy deposit patterns in each strip for an 1-GeV photon at normal incidence in the $xz$- and $yz$-planes. Each segmented region shown in Figure~\ref{fig:Evt_Dis} represents a channel.
-
-\section{Reconstruction of incident angles}
+Training data for machine learning are prepared using the Geant4 simulation such that the input dataset is representative of the detector response of the sampling calorimeter. In order to minimize the bias in the training process related to the dataset, the incident angles are uniformly generated at the detector surface in the range of 0~$<\theta<$~50$^{\circ}$ and 0~$<\varphi<$~360$^{\circ}$, where $\varphi$ denotes the azimuthal angle. The number of training samples is $10^{5}$ considering the limited computing resources. To test the reconstruction of the incident angles, photons are generated at a fixed incident angle $\theta$ with known incident energy and incident position.
+Possible noise effects are not simulated in this paper. Instead, application of lower threshold of 0.5~MeV for each strip is tested and found to provide the consistent result without threshold. %%%
+\section{Results}
 \label{sec:res}
+\subsection{Reconstruction of incident angles}
+\label{sec:reco}
 
-The incident angles of the photons are reconstructed using XGB~\cite{xgboost:2016}, which maps a feature dataset of the energy deposits in each scintillator strip onto a target variable, the incident angle of a photon. Training data were carefully prepared using the Geant4 simulation such that the input datasets were representative of the detector response of the real sampling calorimeters. To minimize the bias in the training process related to the dataset, the incident angles were uniformly generated at the detector surface in the angular range of 0~$<\theta<$~50$^{\circ}$ and 0~$<\varphi<$~360$^{\circ}$, where $\varphi$ denotes the azimuthal angle. The number of training samples was $10^{5}$ considering the limited computing resources. To test the reconstruction of the incident angles, we generated photons at a fixed incident angle $\theta$ with a known incident energy.
+The incident angles of the photons are reconstructed using XGBoost~\cite{xgboost:2016}, which maps a feature dataset, the energy deposit in each scintillator strip, onto a target variable, the incident angle of a photon. XGBoost constructs  gradient-boosted decision trees using the training dataset, efficiently descending the loss function. The size of feature, which is identical with the number of strips, varies with the strip width to have the same coverage. In the case of the 15-mm-wide strips, 35~$\times$~105 channels compose the detector. Hyperparameters of XGBoost drive how models are trained. Main five parameters are studied in this paper. \textit{N\_estimators} defines the maximum allowed number of decision trees to be developed, and  \textit{Max. depth} defines the complexity of the decision-tree structure.  \textit{Subsample} controls the fraction of total event samples for each boosting procedure,  \textit{learning rate} weights a decision tree to be added onto the current model, and  \textit{gamma} regulates the evaluation of each decision tree. 
 
 \begin{figure}[!hbt]
 \centering
-\includegraphics[width=0.7\textwidth]{figures/Fig3_fit_GG.pdf}
-\caption{ The relative incident angle for 1-GeV photons generated at $\theta=$~10$^{\circ}$. The distribution is fitted with the Gaussian and generalized Gaussian functions. The generalized Gaussian function gives a better result.}
+\includegraphics[width=0.7\textwidth]{Fig3_fit_GG.pdf}
+\caption{ The relative incident angle for 1-GeV photons generated at $\theta=$~10$^{\circ}$. The distribution is fitted with the Gaussian and generalized Gaussian functions. The generalized Gaussian function describes the obtained distribution better.}
 \label{fig:angle_10degree}
 \end{figure}
 
-Figure~\ref{fig:angle_10degree} represents the distribution of the relative incident angle ($\Delta\theta$) for 1-GeV photons generated at $\theta=$~10$^{\circ}$. $\Delta\theta$ represents the radial displacement of the reconstructed incident angle relative to the true incident direction. The central 98\% of the distribution is fitted with the Gaussian and generalized Gaussian (GG) functions~\cite{GGfun}. We tested two functions, Gaussian and GG, to describe the reconstructed angular distribution. The GG function, also known as the generalized error distribution, is expressed as:
+Figure~\ref{fig:angle_10degree} represents the distribution of the relative incident angle ($\Delta\theta$) for 1-GeV photons generated at $\theta=$~10$^{\circ}$. $\Delta\theta$ is calculated with the radial displacement of the reconstructed incident angle relative to the true incident direction. The central 98\% of the distribution is fitted with the Gaussian and generalized Gaussian (GG) functions~\cite{GGfun}. The GG function, also known as the generalized error distribution, describes the obtained distribution, which is expressed as =
 \begin{eqnarray} 
 f(x; \mu, \alpha, \beta) = \frac{\beta}{2 \alpha \Gamma(1/\beta)}e^{-(|x-\mu|/\alpha)^\beta},
 \label{eqn:gg}
@@ -117,97 +123,99 @@ where $\mu$ is the mean value. The parameters $\alpha$ and $\beta$ determine the
 
 \begin{figure}[!hbt]
 \centering
-\includegraphics[width=0.69\textwidth]{figures/Fig4_Opt.pdf}
-\caption{Angular resolutions are displayed in terms of combination of N\_estimators and Max. depth. The best angular resolution is obtained with N\_estimators~=~300 and Max. depth~=~100. }
+\includegraphics[width=0.79\textwidth]{Fig4_include_ne250.pdf}
+\caption{Angular resolutions are displayed in terms of combination of \textit{N\_estimators} and \textit{Max. depth}. The best angular resolution is obtained with \textit{N\_estimators}~=~300 and \textit{Max. depth}~=~100. }
 \label{fig:par_scan}
 \end{figure}
 
-Because the performance of the angle reconstruction of the XGB depends on the hyperparameters, we scanned the evaluated angular resolution by changing the hyperparameters. As there were correlations among the hyperparameters, the scanning process was performed in a five-dimensional space for all possible combinations. As an example, Figure 4 shows the test results for N\_estimators and Max. depth. N\_estimators defines the maximum allowed number of decision trees to be developed, and Max. depth defines the complexity of the decision-tree structure. We explored a hyperparameter combination that generated the best angular resolution. Consequently, the N\_estimators and Max. depth were set to 300 and 100, respectively. Similar scans were also performed for different hyperparameters, subsample, learning rates, and gamma. Subsample controls the fraction of total event samples for each boosting procedure, the learning rate weights a decision tree to be added onto the current model, and the gamma regulates the evaluation of each decision tree. Table~\ref{tab:XgbPar} lists the optimized set of hyperparameters that are used in further studies. During the optimization process, the fraction of the tail that is not well described by the GG function is approximately 2\%.
+Because the performance of the angle reconstruction of the XGB depends on the hyperparameters, we scan the angular resolution by changing them. As there are correlations among the hyperparameters, the scanning process is performed in a five-dimensional space for all possible combinations. As an example, Figure 4 shows the test results for \textit{N\_estimators} and \textit{Max. depth}. We explore a hyperparameter combination that generates the best angular resolution within the uncertainty of 0.01 deg. Consequently, the \textit{N\_estimators} and \textit{Max. depth} are set to 300 and 100, respectively. Similar scans are also performed for different hyperparameters, \textit{subsample}, \textit{learning rates}, and \textit{gamma}. Table~\ref{tab:XgbPar} lists the optimized set of hyperparameters that are used in further studies. During the optimization process, the fraction of the tail that is not well described by the GG function is approximately 2\% for different sets of hyperparameters.
 
 \begin{table}[hbt!]{\small
 \centering
 \caption{Hyperparameters of the XGB model}
-\begin{tabular}{cccc}
+\begin{tabular}{llcc}
 \hline 
 Parameter & Function & Default value & Used value \\ \hline 
-N\_estimators & The number of decision trees & N.A. & 300 \\  
-Max. depth & Possible maximum depth of tree structure & 6 & 100 \\ 
-Subsample & Fraction of total data used for a single decision & 1 & 0.8 \\ 
-Learning rate & Step length for calculation & 0.3 & 0.02 \\ 
-Gamma & Requirement on minimum loss function & 0 & 0 \\ 
+\textit{N\_estimators} & The number of decision trees & N.A. & 300 \\  
+\textit{Max. depth} & Possible maximum depth of tree structure & 6 & 100 \\ 
+\textit{Subsample} & Fraction of total data used for a single decision & 1 & 0.8 \\ 
+\textit{Learning rate} & Step length for calculation & 0.3 & 0.02 \\ 
+\textit{Gamma} & Requirement on minimum loss function & 0 & 0 \\ 
 \hline
 \end{tabular}
 \label{tab:XgbPar}
 }\end{table}
 
+\subsection{Performance of angular reconstruction}
+\label{sec:perf}
+
 \begin{figure}[!hbt]
 \centering
-\includegraphics[width=0.58\textwidth]{figures/Fig5_width.pdf}
+\includegraphics[width=0.58\textwidth]{Fig5_width_including7.5_12.5mm.pdf}
 \caption{ Angular resolutions are deduced in terms of the strip width for 1-GeV photons at $\theta=$~10$^{\circ}$ }
 \label{fig:angle_reco_width}
 \end{figure}
 
-Angular resolutions were deduced by varying the strip width from 5 to 35 mm, as shown in Figure~\ref{fig:angle_reco_width}. The narrower the strip width, the larger is the size of the features. Consequently, the angle-reconstruction performance is better with 10-mm-wide strips than 5-mm-wide strips. However, the wider strips hardly provide detailed information on the EM shower. The 15-mm-wide strips yield a good angular resolution of 1.23~$\pm$~0.01$^{\circ}$.
+To inspect the angular resolution for the spatial resolution of measured EM showers,  %%%
+Angular resolutions are deduced by varying the strip width from 5 to 35 mm, as shown in Figure~\ref{fig:angle_reco_width}. The narrower the strip width, the larger is the size of the features. Consequently, the angle-reconstruction performance is better with 10-mm-wide strips than 5-mm-wide strips. However, the wider strips hardly provide detailed information on the EM shower. The 15-mm-wide strips yield a good angular resolution of 1.23~$\pm$~0.01$^{\circ}$,
+and are selected for the further study considering limited budget for the actual construction of the detector.   %%%
 
 \begin{figure}[!hbt]
 \centering
 \stackinset{c}{0.cm}{b}{-0.4cm}{(a)}{
-\includegraphics[width=0.48\textwidth]{figures/Fig6_layer_comp.pdf}
+\includegraphics[width=0.48\textwidth]{Fig6_layer_comp.pdf}
 }\stackinset{c}{0.cm}{b}{-0.4cm}{(b)}{ 
-\includegraphics[width=0.48\textwidth]{figures/Fig6_nlayer.pdf}
+\includegraphics[width=0.48\textwidth]{Fig6_nlayer.pdf}
 }
-\caption{ (a) Reconstructed polar angles ($\theta$) for 1-GeV photons at $\theta=$~10$^{\circ}$. The red histogram represents the polar angle distribution for $E_{\rm{tot}}>$~10~MeV. (b) Angular resolution as a function of the radiation length ($X_{0}$).}
+\caption{ (a) Reconstructed polar angles ($\theta$) for 1-GeV photons at $\theta=$~10$^{\circ}$  with the front 32 layers only. The red histogram represents the angular distribution after requiring $E_{\rm{tot}}>$~10~MeV for the front layers. (b) Angular resolution as a function of the radiation length ($X_{0}$) of the front layers.}
 \label{fig:angle_reco_layer}
 \end{figure}
 
-Focusing only on the angle reconstruction, we designed the detector with the smallest number of layers. Figure~\ref{fig:angle_reco_layer} (a) shows the angles reconstructed using the front 32 layers of the detector, which correspond to 6.2$X_{0}$, for 1-GeV photons. A fraction of the photons fail to be reconstructed because of insufficient information gathering caused by deeply penetrating photons without shower generation. The failed events are represented as a delta function near 0, and such events are removed by requiring the total energy deposit to be higher than 10~MeV, which is 1\% of the incident energy. The angular resolution of the front layer is estimated to be 1.30~$\pm$~0.01$^{\circ}$ when 1.9\% of the photons fail to be reconstructed.
+To further study the feasibility for the detector to be a photon tracker, the reconstruction of the incident angle is conducted with the front layers instead of the full layers. %%
+Figure~\ref{fig:angle_reco_layer} (a) shows the reconstructed angular distribution for 1-GeV photons by using only the front 32 layers, which correspond to 6.2$X_{0}$. A fraction of the photons fail to be reconstructed because of insufficient information gathering caused by deeply penetrating photons without shower generation, where the fraction is estimated to be 1.9\%. The failed events are represented as a delta function near 0, and such events are removed by requiring the total energy deposit at the front layers should be higher than 10~MeV, which is 1\% of the incident energy. The angular resolution of the front layer is estimated to be 1.30~$\pm$~0.01$^{\circ}$. The evolution of angular resolution degrades with the reduction of the number of layers used as the number of contributors to the reconstruction decreases.
 
 \begin{figure}[!hbt]
 \centering
 \stackinset{c}{0.cm}{b}{-0.4cm}{(a)}{
-\includegraphics[width=0.44\textwidth]{figures/Fig7_res_ene.pdf}
+\includegraphics[width=0.44\textwidth]{Fig7_res_ene.pdf}
 }\stackinset{c}{0.cm}{b}{-0.4cm}{(b)}{
-\includegraphics[width=0.44\textwidth]{figures/Fig7_Fit_eres_1.pdf}
+\includegraphics[width=0.44\textwidth]{Fig7_Fit_eres_1.pdf}
 }
-\caption{ (a) Angular resolution as a function of the incident angle for different incident energies. (b) Angular resolution as a function of the incident energy for $\theta=$~25$^{\circ}$; it is fitted to the function $p_{0} \oplus p_{1}/\sqrt{E_{\gamma}(\mathrm{GeV})}$ }
+\caption{ (a) Angular resolution as a function of the incident angle for different incident energies. (b) Angular resolution as a function of the incident energy for $\theta=$~25$^{\circ}$; it is fitted to the function $p_{0} \oplus p_{1}/\sqrt{E_{\gamma}(\mathrm{GeV})}$. All resolutions are estimated with the front 32 layers. }
 \label{fig:angle_reco_dep_gr}
 \end{figure}
 
-Figure~\ref{fig:angle_reco_dep_gr} (a) shows the angular resolution as a function of incident angle for different incident energies ($E_{\gamma}$). The angular resolution does not depend on the incident angle for high incident energies. However, the angular resolution changes significantly for low incident energies at small incident angles. Figure~\ref{fig:angle_reco_dep_gr} (b) shows the angular resolution as a function of the incident photon energy at $\theta=$~25$^{\circ}$. The angular resolution fits to the function $p_{0} \oplus p_{1}/\sqrt{E_{\gamma}(\mathrm{GeV})}$, where $p_{0}$ and $p_{1}$ represent the energy-independent and energy-dependent contributions, respectively.
+Figure~\ref{fig:angle_reco_dep_gr} (a) shows the angular resolution as a function of incident angle for different incident energies ($E_{\gamma}$). Note that the front 32 layers are used for the reconstruction of the incident angle. The inefficiency from the usage of the front layers is estimated to be 2\% at zero degree of incident angle and decreases as 0.5\% at 40 degrees of incident angle. The angular resolution does not depend on the incident angle for high incident energies. However, the angular resolution changes significantly for low incident energies at small incident angles. Figure~\ref{fig:angle_reco_dep_gr} (b) shows the angular resolution as a function of the incident photon energy at $\theta=$~25$^{\circ}$. The angular resolution is well fitted by the function $p_{0} \oplus p_{1}/\sqrt{E_{\gamma}(\mathrm{GeV})}$, where $p_{0}$ and $p_{1}$ represent the energy-independent and energy-dependent contributions, respectively, added in quadrature.
 
 \begin{figure}[!hbt]
 \centering
-\includegraphics[width=0.44\textwidth]{figures/Fig7_p0.pdf}
-\includegraphics[width=0.44\textwidth]{figures/Fig7_p1.pdf}
+\includegraphics[width=0.44\textwidth]{Fig7_p0.pdf}
+\includegraphics[width=0.44\textwidth]{Fig7_p1.pdf}
 \caption{ $p_{0}$ and $p_{1}$ as a function of the incident angle }
 \label{fig:res_edep}
 \end{figure}
 
-Figure~\ref{fig:res_edep} shows the estimated $p_{0}$ and $p_{1}$ as a function of the incident angle. The average values of $p_{0}$ and $p_{1}$ are estimated to be 0.24$^{\circ}$ and 1.24$^{\circ}$, respectively, for $\theta>$~10$^{\circ}$. For a small $\theta$, $p_{1}$ is smaller than that for a larger $\theta$ because the angular resolution is largely dependent on the incident angle for low incident energies, whereas the opposite trend can be observed for $p_{0}$.
+Figure~\ref{fig:res_edep} shows the estimated $p_{0}$ and $p_{1}$ as a function of the incident angle. The average values of $p_{0}$ and $p_{1}$ are estimated to be 0.24$^{\circ}$ and 1.24$^{\circ}$, respectively, for $\theta>$~10$^{\circ}$. 
+In case of $\theta$ smaller than 10 degrees, the angular resolution shows different dependency on the incident energy, which results in smaller $p_{1}$ and larger $p_{0}$ compared to the larger angles.
 
 \begin{figure}[!hbt]
 \centering
-\includegraphics[width=0.6\textwidth]{figures/Fig8_nsample.pdf}
-\caption{ The angular resolution for 1-GeV photons at $\theta=$~10$^{\circ}$ as a function of the number of training samples with different strip widths obtained using the first 32 layers or the full layers. }
+\includegraphics[width=0.6\textwidth]{Fig8_nsample_400k_500k.pdf}
+\caption{ The angular resolution for 1-GeV photons at $\theta=$~10$^{\circ}$ as a function of the number of training samples with different strip widths obtained using the first 32 layers or the full layers. The spectra are fitted with $\sqrt{I^{2} + (D/N_{\mathrm{sample}})^{k}}$. }
 \label{fig:multi-parameter}
 \end{figure}
 
-Figure~\ref{fig:multi-parameter} shows the angular resolution for different numbers of training samples and different detector configurations. All configurations show improvement in the angular resolution with increasing training samples, which indicates that the maturity of machine learning is an important factor in angle reconstruction. With an increase in the number of training events, the Angular resolution improves most rapidly for the configuration with 5-mm-wide scintillator strips. In other words, the required training events must be sufficiently large to correlate a larger number of features. Considering the limited computing resources, the configuration of 32 layers and 15-mm-wide strip with $10^{5}$ training events was chosen to train the XGB model. The training result for such a configuration differs by only 0.2$^{\circ}$ from that of the setup with full layers, 5-mm-wide strips, and $5\times10^{5}$ training events.
+Figure~\ref{fig:multi-parameter} shows the angular resolution for different numbers of training samples and different detector configurations. The width of curves represents the statistical uncertainty. All configurations show improvement in the angular resolution with the increasing number of training samples, which indicates that the maturity of machine learning is an important factor in angle reconstruction. With an increase in the number of training events, the angular resolution improves most rapidly for the configuration with 5-mm-wide scintillator strips. In other words, the required number of training events should be large enough to provide correct answer from the correlations 
+between many features. The spectra are fitted with the empirical function of $\sqrt{I^{2} + (D/N_{\mathrm{sample}})^{k}}$, where $I$ denotes the intrinsic resolution and $D$ and $k$ are describing the decreasing trend. The numbers of training samples reaching the angular resolution of 1.1 times of $I$ for 25, 15, and 5 mm strips are estimated to be 58k, 280k, and 7.6M, respectively, indicating that the number of training samples are insufficient especially for 5-mm-wide strips.
  
 \section{Summary}
 \label{sec:sum}
 
-We report the simulation results of the incident angle reconstruction of EM sampling calorimeters with photons in the range of 0.1 to 2~GeV. ~To improve the angular resolution, we tuned the hyperparameters of XGBoost while considering the correlating effects among them.
-
-In terms of detector configuration, strips with narrower widths provide better angular resolution using a finely measured EM shower with the assumption that the training is fully conducted. However, the configuration with a smaller strip width causes a larger feature size, which negatively affects the training depending on the quantity of training data. The angular resolution may be optimized by considering the two competing effects of the strip width and quantity of training data. We dedicated the front layers of the detector to reconstructing the incident angle. We obtain an angular resolution of 1.30~$\pm$~0.01$^{\circ}$ for the configuration of 32 layers (6.2$X_{0}$) of 15-mm-wide strips, which is a reduction of 0.1$^{\circ}$ compared to that of the configuration with full layers (20$X_{0}$) in the case of $10^{5}$ training samples. 
-
-The angular resolution depends on the incident energy of the photon, and the dependence is expressed as $p_{0} \oplus p_{1}/\sqrt{E_{\gamma}}$. Except for small incident angles ($\theta<$~$^{\circ}$~deg), the two parameters do not significantly change up to 
-$40^{\circ}$, and the dependence is estimated to be 0.24 $\oplus$ 1.24$^{\circ}/\sqrt{E_{\gamma}}$. 
+We report on the optimization of the angle reconstruction of a a toy Lead/Plastic EM sampling calorimeter for photons in the range of 0.1 to 2~GeV, using the machine learning technique for the next KOTO experiment. The hyperparameters of the XGBoost have been tuned to obtain the best angular resolution, in which the correlating effects among them need to be considered. In terms of the detector configuration, strips with narrower width provide better angular resolution with detailed information on the EM shower when the training on the data is fully conducted. However, the configuration with a smaller strip width requires the larger number of channels to have the same coverage, and this negatively affects to train the model. training with respect to the quantity of training data. The angular resolution may be optimized by considering the two competing effects of the strip width and quantity of training data. Focusing on the angle measurement with a compact detector, we can obtain an angular resolution of 1.30~$\pm$~0.01$^{\circ}$ for the configuration of 32 layers (6.2$X_{0}$) of 15-mm-wide strips, which is a reduction of 0.1$^{\circ}$ compared to that of the configuration with full layers (20$X_{0}$) with $10^{5}$ training samples. The angular resolution depends on the incident energy of the photon, and the dependence is expressed as $p_{0} \oplus p_{1}/\sqrt{E_{\gamma}}$. Except for small incident angles ($\theta<$~$^{\circ}$~deg), the two parameters do not significantly change up to $40^{\circ}$, and the dependence is estimated to be 0.24 $\oplus$ 1.24$^{\circ}/\sqrt{E_{\gamma}}$.
 
 \label{sec:con}
 
 %\pagebreak
-
 
 \section*{Acknowledgment}
 This work was supported by the National Research Foundation of Korea (NRF) 
@@ -216,25 +224,73 @@ This work was supported by the National Research Foundation of Korea (NRF)
 
 \begin{thebibliography}{99}
  
-\bibitem{KOTO:MB}
-Y. Tajima {\it et al.}, Nucl. Instrum. Meth. A 592, 261 (2008).
-
-\bibitem{CMS:EMCAL}
-Giovanni Mazza {\it et al.} (CMS Collaboration), Nucl. Instrum. Meth. A 958 (2020)
-
-\bibitem{BELLE:EMCAL}
-K. Miyabayashi {\it et al.}, JINST 9 (2014) 09, P09011
-
-\bibitem{Murayama:2020mcp}
-R. Murayama {\it et al.}, Nucl. Instrum. Meth. A 953 (2020) 
+\bibitem{unitext}
+M. Livan and R. Wigmans, Calorimetry for collider physics, an Introduction, DOI: https://doi.org/10.1007/978-3-030-23653-3
  
-\bibitem{trk:ref}
-O. Adriani {\it et al.}, Nucl. Instrum. Meth. A 854 (2017) 
+\bibitem{CMS:mat}
+CMS Collaboration, JINST 2010 JINST 5 T03012
+
+\bibitem{CDF:mat}
+CDF Collaboration, Nucl. Instrum. Meth. A 267 (1988) 272-279
+ 
+\bibitem{DELPHI:mat}
+DELPHI Collaboration, Nucl. Instrum. Meth. A 305 (1991) 320-330
+
+\bibitem{UGAS:mat}
+Yu. Galaktionov {\it et al.}, Nucl. Instrum. Meth. A 251 (1986) 258-274
+
+\bibitem{LiqAR:mat}
+ATLAS Collaboration, Eur. Phys. J. C (2010) 70: 723–753
+
+\bibitem{shashlik:con}
+A.C. Benvenuti {\it et al.}, Nucl. Instrum. Meth. A 432 (1999) 232-239
+
+\bibitem{KOTO:MB}
+Y. Tajima {\it et al.}, Nucl. Instrum. Meth. A {\bf 592}, 261 (2008).
+
+\bibitem{KLOE:con}
+DA$\phi$NE Collaboration, Nucl. Instrum. Meth. A 482 (2002) 364–386
+
+\bibitem{FERMI:LAT}
+W. B. Atwood {\it et al.}, Astrophys J.697 (2009) 1071-1102
+
+\bibitem{CALET}
+N. Cannady {\it et al.}, Astrophys. J. ,Suppl. Ser. 238:5 (2018) 
+
+\bibitem{DMPE}
+J. Chang {\it et al.}, Astropart. Phys. 95 (2017) 6-24
+
+\bibitem{KOTOexp}
+KOTO Collaboration, Phys. Rev. Lett. 126, 121801 (2021)
+ 
+\bibitem{KOTObeam}
+T. Shimogawa, Nucl. Instrum. Meth. A {\bf 623} (2010) 585-587
+
+\bibitem{KOTOtheory}
+Andrzej J. Buras {\it et al.}, JHEP 11 (2015) 033
+
+\bibitem{KOTO2}
+TF on the extension of the Hadron Experimental Facility, arXiv:2110.04462
+
+\bibitem{KOPIO}
+I.-H. Chiang {\it et al.}, AGS Experimental Proposal 926 (1996).
+
+\bibitem{KOPIOcdr}
+KOPIO Collaboration, Conceptual Design Report (2005)
 
 \bibitem{xgboost:2016}
 C. Tianqi {\it et al.}, 
 {\it Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining},
 (2016) 785.
+
+\bibitem{mle}
+DAMPE Collaboration, JINST 17 (2022) 06, P06031
+
+\bibitem{mlp}
+ALICE Collaboration, JINST 17 (2022) 07, C07016
+
+\bibitem{mlt}
+PADME Collaboration, Instruments 6 (2022) 46
 
 \bibitem{GGfun}
 D. Gonzalez {\it et al.}, IEEE Trans. Image Processing. 4, 485 (2007)
@@ -242,15 +298,10 @@ D. Gonzalez {\it et al.}, IEEE Trans. Image Processing. 4, 485 (2007)
 \bibitem{GEANT4}
 S. Agostinelli {\it et al.},  Nucl. Instr. and Meth. A {\bf 506} (2003) 250.
 
+\bibitem{PbScint}
+Zu-Hao Li {\it et al.}, Chin. Phys. C 38 (2014) 5, 056203
+
 \end{thebibliography}
-
-%\section*{Acknowledgement}
-%This paper was supported by the National Research Foundation of Korea (NRF) grants funded by the Korea government (MIST) (2019R1A2C1084552 and \\ 2020R1A3B2079993).
-
-%\bibliographystyle{elsarticle-num}
-%\bibliography{paper.bib}
-
-%\printbibliography
 
 \end{document}
 
